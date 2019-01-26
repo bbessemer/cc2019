@@ -1,3 +1,5 @@
+// SERVER SIDE 
+
 const {app, BrowserWindow} = require('electron')
 
 let window
