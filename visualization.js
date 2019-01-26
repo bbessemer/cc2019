@@ -38,7 +38,7 @@ var INITIAL_STACKFRAME_ITEMCREATE_YPOS = 30;
 var STACKFRAME_HEIGHT_GROWTH = 80;
 // top and bottom padding of 30 px, height of 60 px.
 // 30 px, 60 px, 30 px = 120 px initial ; 20 between rows = grow by 60+20=80 px
-var STACKFRAME_ITEMS_PER_ROW = 12;
+var STACKFRAME_ITEMS_PER_ROW = 8;
 var STACKFRAME_ITEM_WIDTH_PROPORTION = 1.0 / (STACKFRAME_ITEMS_PER_ROW + 2);
 
 
@@ -111,7 +111,7 @@ function GetNextColor ()
 	if (++NextColorID >= Colors.length) NextColorID = 0;
 	return color;
 }
-function NewFrameItem (stackframe)
+function NewFrameItem (stackframe, variable_name)
 {
 	if (stackframe.items % STACKFRAME_ITEMS_PER_ROW == 0 && stackframe.items != 0)
 	{
@@ -123,13 +123,35 @@ function NewFrameItem (stackframe)
 	var stackitem = document.createElement("div");
 	stackframe.element.appendChild(stackitem);
 	stackitem.className = "StackItem";
-	stackitem.style["background-color"] = "#" + GetNextColor();
+
+	var ItemName = document.createElement("div");
+	ItemName.className = "StackItemNameBox";
+	stackitem.appendChild(ItemName);
+
+	var ItemNameText = document.createElement("div");
+	ItemNameText.className = "StackItemName";
+	ItemName.appendChild(ItemNameText);
+
+	var ItemValue = document.createElement("div");
+	ItemValue.className = "StackItemValueBox";
+	stackitem.appendChild(ItemValue);
+
+	var ItemValueText = document.createElement("div");
+	ItemValueText.className = "StackItemValue";
+	ItemValue.appendChild(ItemValueText);
+
+	ItemValue.style["background-color"] = "#" + GetNextColor();
+
+	ItemNameText.innerHTML = variable_name;
+	ItemValueText.innerHTML = "0";
+
 	stackitem.style.top = stackframe.current_ypos + "px";
 	stackitem.style.left = stackframe.current_xpos * 100 + "%";
+	stackitem.style.width = STACKFRAME_ITEM_WIDTH_PROPORTION * 100 + "%";
 	stackframe.current_xpos += STACKFRAME_ITEM_WIDTH_PROPORTION;
 	console.log("next left will be " + stackframe.current_xpos);
 	ForceRecalculate(stackitem);
 	stackitem.classList.add("FadedIn");
 
-	return stackitem;
+	return ItemValueText;
 }
