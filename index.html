@@ -2,13 +2,19 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title id="WindowTitle">Hello World!</title>
+    <title id="WindowTitle">Window Title</title>
+	<link rel="stylesheet" type="text/css" href="index_style.css">
   </head>
   <body>
     <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+	<div class="redbox">
+	    We are using node <script>document.write(process.versions.node)</script>,
+	    Chrome <script>document.write(process.versions.chrome)</script>,
+	    and Electron <script>document.write(process.versions.electron)</script>.
+	</div>
+
   </body>
+  <script src="antimenu.js"></script>
   <script src="index_interaction.js"></script>
+
 </html>
