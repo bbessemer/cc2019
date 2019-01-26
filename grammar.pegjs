@@ -7,7 +7,7 @@ Program = funcs:Function* {
 }
 
 Function
-	= nameType:Declaration _ "(" argList:ArgList ")" _ code:Block _ {
+	= _ nameType:Declaration _ "(" argList:ArgList ")" _ code:Block _ {
     	return {
         	retType: nameType.type,
             name: nameType.name.name,
