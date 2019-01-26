@@ -97,11 +97,11 @@ function DestroyStackFrame ()
 }
 
 var Colors = [
-	"ff8080",
-	"c880ff",
-	"80ff80",
-	"80a2ff",
-	"d0ff80",
+	"df6060",
+	"a860df",
+	"60df60",
+	"6082df",
+	"b0df60",
 
 ];
 var NextColorID = 0;

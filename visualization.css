@@ -46,6 +46,7 @@
 	font-family: monospace;
 	margin: 8px;
 	position: absolute;
+	font-size: 14pt;
 }
 .StackItem
 {
@@ -113,9 +114,13 @@
   -webkit-text-stroke-color: black;*/
    //-webkit-text-stroke: 1px black;
    color: white;
-   text-shadow:
+   /*text-shadow:
      -1px -1px 0 black,
       1px -1px 0 black,
       -1px 1px 0 black,
        1px 1px 0 black;
+	   */
+	font-weight: bold;
+	font-size: 16pt;
+
 }
