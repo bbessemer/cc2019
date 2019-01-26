@@ -1,0 +1,11 @@
+.StackFrame
+{
+	transform: scaleY(0);
+	min-height: 200px;
+	background-color: #0F0;
+}
+.StackFrame .Expanded
+{
+	transform: scaleY(1);
+	transition: transform 0.5s;
+}
