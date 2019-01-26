@@ -6,10 +6,14 @@ let window
 
 function createWindow()
 {
-	//App window
-	window = new BrowserWindow({width: 1280, height: 720, autoHideMenuBar: true, show: false})
-	//Dev tool window
-	//devtools = new BrowserWindow()
+	window = new BrowserWindow({
+		width: 1280,
+		height: 720,
+		autoHideMenuBar: true,
+		show: false,
+		//icon:"icon.ico",
+		icon: "icon.png"
+	})
 
 	window.loadFile('index.html')
 	window.setMenu(null)
