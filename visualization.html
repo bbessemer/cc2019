@@ -3,11 +3,24 @@
 <div id="StackFramesZone"></div>
 <script src="visualization.js"></script>
 <script>
+	var x;
 var test = [
 	function(){
-		var x = NewStackFrame("main");
+		x = NewStackFrame("main");
 		//x.style = "background-color: #000;";
 		//x.style = "height: " + n + "px;";
+	},
+	function(){
+		x.style = "height: 400px;";
+	},
+	function(){
+		NewFrameItem(x).innerHTML = "5";
+	},
+	function(){
+		NewFrameItem(x).innerHTML = "25";
+	},
+	function(){
+		NewFrameItem(x).innerHTML = "125";
 	},
 	function(){NewStackFrame("foo");},
 	function(){NewStackFrame("foo");},
@@ -30,7 +43,7 @@ var pos = 0;
 function donext ()
 {
 	if (pos >= test.length) clearInterval(doer);
-	test[pos++]();
+	else test[pos++]();
 };
 doer = setInterval(donext,1000);
 

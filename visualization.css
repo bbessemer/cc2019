@@ -47,3 +47,16 @@
 	margin: 8px;
 	position: absolute;
 }
+.StackItem
+{
+	opacity: 0;
+	transition: opacity 0.5s;
+	margin: 0 auto;
+	height: 20px;
+	width: 100px;
+
+}
+.FadedIn
+{
+	opacity: 1;
+}
