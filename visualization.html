@@ -3,15 +3,41 @@
 <div id="StackFramesZone"></div>
 <script src="visualization.js"></script>
 <script>
-	setInterval(NewStackFrame,1000);
+var test = [
+	function(){
+		var x = NewStackFrame("main");
+		//x.style = "background-color: #000;";
+		//x.style = "height: " + n + "px;";
+	},
+	function(){NewStackFrame("foo");},
+	function(){NewStackFrame("foo");},
+	function(){NewStackFrame("foo");},
+	function(){NewStackFrame("foo");},
+	function(){DestroyStackFrame();},
+	function(){DestroyStackFrame();},
+	function(){NewStackFrame("foo");},
+	function(){DestroyStackFrame();},
+	function(){NewStackFrame("foo");},
+	function(){NewStackFrame("foo");},
+	function(){DestroyStackFrame();},
+	function(){DestroyStackFrame();},
+	function(){DestroyStackFrame();},
+	function(){DestroyStackFrame();},
+	function(){DestroyStackFrame();},
+]
+var doer;
+var pos = 0;
+function donext ()
+{
+	if (pos >= test.length) clearInterval(doer);
+	test[pos++]();
+};
+doer = setInterval(donext,1000);
 
 
 
 </script>
 
-
-
-dasfdsafsd
 
 
 
