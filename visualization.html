@@ -3,7 +3,14 @@
 <div id="StackFramesZone"></div>
 <script src="visualization.js"></script>
 <script>
-	var x;
+/*
+	var A = NewStackFrame("oof");
+
+	NewFrameItem(A).innerHTML = "5";
+	NewFrameItem(A).innerHTML = "25";
+	NewFrameItem(A).innerHTML = "125";
+*/
+var x;
 var test = [
 	function(){
 		x = NewStackFrame("main");
@@ -25,8 +32,8 @@ var test = [
 	function(){NewStackFrame("foo");},
 	function(){NewStackFrame("foo");},
 	function(){NewStackFrame("foo");},
-	function(){NewStackFrame("foo");},
-	function(){DestroyStackFrame();},
+	//function(){NewStackFrame("foo");},
+	//function(){DestroyStackFrame();},
 	function(){DestroyStackFrame();},
 	function(){NewStackFrame("foo");},
 	function(){DestroyStackFrame();},
