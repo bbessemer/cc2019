@@ -2,7 +2,7 @@
   "name": "cc2019",
   "version": "1.0.0",
   "description": "cc2019",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
   	"start": "electron . "
   },
