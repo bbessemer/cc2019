@@ -16,7 +16,8 @@ pre
 	background-color: #EFEFEF;
 	border-color: #EEEEEE;
 	border-style: solid;
-	width: 100%;
+	width: 99%;
+	height: 98%;
 }
 
 .rowNumber
@@ -32,4 +33,5 @@ pre
 	align: left;
 	vertical-align: top;
 	width: 100px;
+
 }
