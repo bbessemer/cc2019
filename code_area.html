@@ -1,31 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="code_area_style.css">
+		<!-- Style has to be embedded within file for ace -->
+		<style type="text/css" media="screen">
+			#CodeArea
+			{
+				position: absolute;
+				width: 800px;
+				height: 600px;
+			}
+		</style>
 	</head>
 	<body>
-		<html>
-			<table id="CodeArea">
-				<tr>
-					<td class="rowNumber">
-						<pre class="rowNumber">
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-						</pre>
-					</td>
-					<td class="codeBlock">
-						<textarea rows="8" cols="40"></textarea>
-					</td>
-				</tr>
-			</table>
-		</html>
+		<!-- Our code area element -->
+		<div id="CodeArea"></div>
+
+		<!-- Our code area scripts -->
+		<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script src="code_area.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			//Creates the code editor out of an iframe
+			var codeArea = window.CreateCodeArea(600, 400);
+			codeArea.CreateEditor("CodeArea", "int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\";\n\treturn x;\n}\n")
+		</script>
 	</body>
+
+	<!-- Debug tools code -->
+	<script>
+		document.addEventListener("keydown", function (e)
+			{
+				if (e.which === 123)
+			{
+				console.log(codeArea.GetText());
+				codeArea.SetText("int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\"\n\treturn x;\n}\n");
+				window.OpenDevTools();
+			}
+			else if (e.which === 116)
+			{
+				location.reload();
+			}
+	 	});
+	</script>
 </html>
