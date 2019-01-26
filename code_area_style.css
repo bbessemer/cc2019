@@ -1,0 +1,35 @@
+body
+{
+	margin: 0px;
+	display: block;
+}
+
+pre
+{
+	margin: 0px;
+}
+
+#CodeArea
+{
+	display: block;
+	position: absolute;
+	background-color: #EFEFEF;
+	border-color: #EEEEEE;
+	border-style: solid;
+	width: 100%;
+}
+
+.rowNumber
+{
+	text-align: right;
+	width: 20px;
+	vertical-align: top;
+}
+
+.codeBlock
+{
+	display: table-cell;
+	align: left;
+	vertical-align: top;
+	width: 100px;
+}

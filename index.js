@@ -6,14 +6,19 @@ let window
 
 function createWindow()
 {
+	//App window
 	window = new BrowserWindow({width: 1280, height: 720, autoHideMenuBar: true, show: false})
+	//Dev tool window
+	//devtools = new BrowserWindow()
 
 	window.loadFile('index.html')
 	window.setMenu(null)
+	//window.webContents.openDevTools()
 
 	//Makes sure to only show the window once the renderer has rendered the first page
 	window.once('ready-to-show', () => {
 		window.show();
+		//devtools.webContents.openDevTools();
 	})
 
 	window.on('closed', () => {
