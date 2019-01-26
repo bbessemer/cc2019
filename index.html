@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<script src = "code_area.js"></script>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title id="WindowTitle">Window Title</title>
 		<link rel="stylesheet" type="text/css" href="index_style.css">
+		<!-- Style has to be embedded within file for ace -->
+		<style type="text/css" media="screen">
+			#CodeArea
+			{
+				position: absolute;
+				width: 300px;
+				height: 400px;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="TaskDescription">Task Description</div>
@@ -14,17 +22,8 @@
 			Chrome <script>document.write(process.versions.chrome)</script>,
 			and Electron <script>document.write(process.versions.electron)</script>.
 		</div>
+		<br>
 
-		<!-- Our code area element -->
-		<!--<iframe id="CodeArea" src="code_area.html"></iframe>-->
-		<!-- Our code area script -->
-		<!--<script>
-			var area = window.CreateCodeArea(800, 400, 'test');
-			var code_area = document.getElementById('CodeArea')
-
-			code_area.width = area.width;
-			code_area.height = area.height;
-		</script>-->
 
 		<a href="code_area.html">Code Workspace</a>
 		<a href="visualization.html">Visualization</a>
