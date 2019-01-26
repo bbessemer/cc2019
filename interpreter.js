@@ -27,22 +27,40 @@ var testAddFunc = {
     ]
 }
 
+function addTest() {
+    interpretFunc(testAddFunc,
+                  [
+                      {
+                          type: "Integer",
+                          val: 1
+                      },
+                      {
+                          type: "Integer",
+                          val: 2
+                      }
+                  ],
+                  { _animObject: NewStackFrame("add") });
+}
+
+
 function interpretFunc(func, args, stackFrame) {
     for (var i = 0; i < func.args.length; i++) {
         stackFrame[func.args[i].name] = args[i];
-        animateVarDecl(func.args[i].name, args[i]);
+        animateVarDecl(func.args[i].name, args[i], stackFrame);
     }
 
     for (var i = 0; i < func.code.length; i++) {
         let statement = func.code[i];
 
         if (statement.type == "VarDecl") {
-            stackFrame[statement.name] = animateVarDecl(statement.name, interpretExpr(statement.val, stackFrame))
+            stackFrame[statement.name] = animateVarDecl(statement.name,
+                interpretExpr(statement.val, stackFrame), stackFrame)
         } else if (statement.type == "Assignment") {
             if (typeof(stackFrame[statement.name]) == "undefined") {
                 error("Variable " + statement.name + " is not defined.");
             } else {
-                stackFrame[statement.name] = animateAssign(statement.name, interpretExpr(statement.val, stackFrame));
+                stackFrame[statement.name] = animateAssign(statement.name,
+                    interpretExpr(statement.val, stackFrame), stackFrame);
             }
         }
     }
@@ -51,7 +69,7 @@ function interpretFunc(func, args, stackFrame) {
 function interpretExpr(expr, stackFrame) {
     if (expr.type == "Integer") {
         return animateSelect(expr);
-    } else if (expr.type == "Symbol");
+    } else if (expr.type == "Symbol") {
         return animateSelect(expr);
     } else if (expr.type == "Add") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
@@ -66,7 +84,7 @@ function interpretExpr(expr, stackFrame) {
     } else if (expr.type == "Mult") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
-        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number) {
+        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number") {
             error("Cannot multiply a non-number.");
             return null;
         }
@@ -76,7 +94,7 @@ function interpretExpr(expr, stackFrame) {
     } else if (expr.type == "Compare") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
-        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number) {
+        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number") {
             error("Cannot compare a non-number.");
             return null;
         }
