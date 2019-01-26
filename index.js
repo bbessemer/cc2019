@@ -4,9 +4,14 @@ let window
 
 function createWindow()
 {
-	window = new BrowserWindow({width: 1280, height: 720, autoHideMenuBar: true})
+	window = new BrowserWindow({width: 1280, height: 720, autoHideMenuBar: true, show: false})
 
 	window.loadFile('index.html')
+
+	//Makes sure to only show the window once the renderer has rendered the first page
+	window.once('ready-to-show', () => {
+		window.show();
+	})
 
 	window.on('closed', () => {
 		// Derefencing window object will
