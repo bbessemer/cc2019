@@ -1,13 +1,50 @@
 <!DOCTYPE html>
+<script src = "code_area.js"></script>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-  </body>
+	<head>
+		<meta charset="UTF-8">
+		<title id="WindowTitle">Window Title</title>
+		<link rel="stylesheet" type="text/css" href="index_style.css">
+	</head>
+	<body>
+		<div id="TaskDescription">Task Description</div>
+		<h1>Hello World!</h1>
+		<div class="redbox">
+			We are using node <script>document.write(process.versions.node)</script>,
+			Chrome <script>document.write(process.versions.chrome)</script>,
+			and Electron <script>document.write(process.versions.electron)</script>.
+		</div>
+
+		<!-- Our code area element -->
+		<!--<iframe id="CodeArea" src="code_area.html"></iframe>-->
+		<!-- Our code area script -->
+		<!--<script>
+			var area = window.CreateCodeArea(800, 400, 'test');
+			var code_area = document.getElementById('CodeArea')
+
+			code_area.width = area.width;
+			code_area.height = area.height;
+		</script>-->
+
+		<a href="code_area.html">Code Workspace</a>
+		<a href="visualization.html">Visualization</a>
+	</body>
+
+	<script src="index_interaction.js"></script>
+
+	<!-- Debug tools code -->
+	<script>
+    document.addEventListener("keydown", function (e)
+		{
+        if (e.which === 123)
+				{
+            window.OpenDevTools();
+        }
+				else if (e.which === 116)
+				{
+            location.reload();
+        }
+    });
+	</script>
+
 </html>
