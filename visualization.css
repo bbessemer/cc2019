@@ -49,11 +49,16 @@
 }
 .StackItem
 {
+	position: absolute;
 	opacity: 0;
 	transition: opacity 0.5s;
 	margin: 0 auto;
-	height: 20px;
+	height: 60px;
 	width: 100px;
+
+}
+.StackItemValue
+{
 
 }
 .FadedIn

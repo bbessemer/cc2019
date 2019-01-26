@@ -6,7 +6,14 @@
 <script src="viewmodel.js"></script>
 <script src="parser.js"></script>
 <script>
-	var x;
+/*
+	var A = NewStackFrame("oof");
+
+	NewFrameItem(A).innerHTML = "5";
+	NewFrameItem(A).innerHTML = "25";
+	NewFrameItem(A).innerHTML = "125";
+*/
+var x;
 var test = [
 	function(){
 		x = NewStackFrame("main");
@@ -26,7 +33,7 @@ var test = [
 		NewFrameItem(x).innerHTML = "125";
 	},
 	function(){NewStackFrame("foo");},
-	function(){DestroyStackFrame();},
+    function(){DestroyStackFrame();},
 	function(){DestroyStackFrame();},
     addTest
 ]
