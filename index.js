@@ -9,6 +9,7 @@ function createWindow()
 	window = new BrowserWindow({width: 1280, height: 720, autoHideMenuBar: true, show: false})
 
 	window.loadFile('index.html')
+	window.setMenu(null)
 
 	//Makes sure to only show the window once the renderer has rendered the first page
 	window.once('ready-to-show', () => {
