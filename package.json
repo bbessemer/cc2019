@@ -1,0 +1,22 @@
+{
+  "name": "cc2019",
+  "version": "1.0.0",
+  "description": "cc2019",
+  "main": "index.js",
+  "scripts": {
+  	"start": "electron . "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbessemer/cc2019.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bbessemer/cc2019/issues"
+  },
+  "homepage": "https://github.com/bbessemer/cc2019#readme",
+  "devDependencies": {
+    "electron": "^4.0.2"
+  }
+}
