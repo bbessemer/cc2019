@@ -3,13 +3,24 @@
 <div id="StackFramesZone"></div>
 <script src="visualization.js"></script>
 <script>
-	NewStackFrame();
-		NewStackFrame();
-			NewStackFrame();
-				NewStackFrame();
-					NewStackFrame();
+	setInterval(NewStackFrame,1000);
 
 
 
+</script>
 
+
+
+dasfdsafsd
+
+
+
+<script>
+    document.addEventListener("keydown", function (e) {
+        if (e.which === 123) {
+            require('remote').getCurrentWindow().toggleDevTools();
+        } else if (e.which === 116) {
+            location.reload();
+        }
+    });
 </script>

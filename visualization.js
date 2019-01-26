@@ -12,12 +12,13 @@ function NewInt ()
 }
 
 var StackFramesZone = document.getElementById("StackFramesZone");
-var TopLevelStackFrame = null;
 var BackgroundLightness = true;
 function GetBackgroundName ()
 {
 	return "Background" + (BackgroundLightness ? "Light" : "Dark");
 }
+var n = 0;
+var StackFrames = [];
 function NewStackFrame ()
 {
 	// insert a new element into the page *before* the previous stack frame, and give it an animation that makes its
@@ -26,16 +27,19 @@ function NewStackFrame ()
 	var stackframe = document.createElement("div");
 	stackframe.className = "StackFrame " + GetBackgroundName();
 	BackgroundLightness = !BackgroundLightness;
-	if (TopLevelStackFrame === null)
+	if (StackFrames.length >= 1)
 	{
-		StackFramesZone.appendChild(stackframe);
-		TopLevelStackFrame = stackframe;
+		var prev_top = StackFrames[StackFrames.length - 1];
+		StackFramesZone.insertBefore(stackframe,prev_top);
 	}
 	else
 	{
-		TopLevelStackFrame.insertBefore(stackframe);
+		console.log("first");
+		StackFramesZone.appendChild(stackframe);
 	}
-  	stackframe.classList.add("Expanded");
+  	//stackframe.classList.add("Expanded");
+	stackframe.innerHTML = "frame " + ++n;
+	StackFrames[StackFrames.length] = stackframe;
 	return stackframe;
 }
 
