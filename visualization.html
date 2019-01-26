@@ -2,14 +2,63 @@
 <link rel="stylesheet" type="text/css" href="visualization.css">
 <div id="StackFramesZone"></div>
 <script src="visualization.js"></script>
+<script src="interpreter.js"></script>
+<script src="viewmodel.js"></script>
+<script src="parser.js"></script>
 <script>
-	NewStackFrame();
-		NewStackFrame();
-			NewStackFrame();
-				NewStackFrame();
-					NewStackFrame();
+
+	var A = NewStackFrame("oof");
+
+	NewFrameItem(A).innerHTML = "5";
+	NewFrameItem(A).innerHTML = "25";
+	NewFrameItem(A).innerHTML = "125";
+
+var x;
+var test = [
+	function(){
+		x = NewStackFrame("main");
+		//x.style = "background-color: #000;";
+		//x.style = "height: " + n + "px;";
+	},
+	function(){
+		x.style = "height: 400px;";
+	},
+	function(){
+		NewFrameItem(x).innerHTML = "5";
+	},
+	function(){
+		NewFrameItem(x).innerHTML = "25";
+	},
+	function(){
+		NewFrameItem(x).innerHTML = "125";
+	},
+	function(){NewStackFrame("foo");},
+    function(){DestroyStackFrame();},
+	function(){DestroyStackFrame();},
+    addTest
+]
+var doer;
+var pos = 0;
+function donext ()
+{
+	if (pos >= test.length) clearInterval(doer);
+	else test[pos++]();
+};
+doer = setInterval(donext,1000);
+
+
+
+</script>
 
 
 
 
+<script>
+    document.addEventListener("keydown", function (e) {
+        if (e.which === 123) {
+            require('remote').getCurrentWindow().toggleDevTools();
+        } else if (e.which === 116) {
+            location.reload();
+        }
+    });
 </script>
