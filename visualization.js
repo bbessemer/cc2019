@@ -13,13 +13,19 @@ function NewInt ()
 
 var StackFramesZone = document.getElementById("StackFramesZone");
 var TopLevelStackFrame = null;
+var BackgroundLightness = true;
+function GetBackgroundName ()
+{
+	return "Background" + (BackgroundLightness ? "Light" : "Dark");
+}
 function NewStackFrame ()
 {
 	// insert a new element into the page *before* the previous stack frame, and give it an animation that makes its
 	// transform's height go from 0% to 100% to visually smoothly push down the previous stack frame.
 
 	var stackframe = document.createElement("div");
-	stackframe.className = "StackFrame";
+	stackframe.className = "StackFrame " + GetBackgroundName();
+	BackgroundLightness = !BackgroundLightness;
 	if (TopLevelStackFrame === null)
 	{
 		StackFramesZone.appendChild(stackframe);
@@ -29,7 +35,7 @@ function NewStackFrame ()
 	{
 		TopLevelStackFrame.insertBefore(stackframe);
 	}
-  	element.classList.add("Expanded");
+  	stackframe.classList.add("Expanded");
 	return stackframe;
 }
 
