@@ -50,7 +50,9 @@ function interpretFunc(func, args) {
 }
 
 function interpretExpr(expr, stackFrame) {
-    if (expr.type == "Add") {
+    if (expr.type == "Integer") {
+        return animateSelect(expr);
+    } else if (expr.type == "Add") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
         if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number) {
