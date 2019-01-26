@@ -27,8 +27,17 @@ var testAddFunc = {
     ]
 }
 
+let addText = `
+int add(int a, int b)
+{
+    int x = a + b;
+    return x;
+}`
+
 function addTest() {
-    interpretFunc(testAddFunc,
+    var add = parser.parse(addText).add;
+    console.log(add);
+    interpretFunc(add,
                   [
                       {
                           type: "Integer",

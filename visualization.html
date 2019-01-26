@@ -4,6 +4,7 @@
 <script src="visualization.js"></script>
 <script src="interpreter.js"></script>
 <script src="viewmodel.js"></script>
+<script src="parser.js"></script>
 <script>
 
 	var A = NewStackFrame("oof");
@@ -32,19 +33,7 @@ var test = [
 		NewFrameItem(x).innerHTML = "125";
 	},
 	function(){NewStackFrame("foo");},
-	function(){NewStackFrame("foo");},
-	function(){NewStackFrame("foo");},
-	//function(){NewStackFrame("foo");},
-	//function(){DestroyStackFrame();},
-	function(){DestroyStackFrame();},
-	function(){NewStackFrame("foo");},
-	function(){DestroyStackFrame();},
-	function(){NewStackFrame("foo");},
-	function(){NewStackFrame("foo");},
-	function(){DestroyStackFrame();},
-	function(){DestroyStackFrame();},
-	function(){DestroyStackFrame();},
-	function(){DestroyStackFrame();},
+    function(){DestroyStackFrame();},
 	function(){DestroyStackFrame();},
     addTest
 ]
