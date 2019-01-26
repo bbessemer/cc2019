@@ -19,7 +19,7 @@ function NewInt ()
 }
 
 var StackFramesZone = document.getElementById("StackFramesZone");
-var BackgroundLightness = true;
+var BackgroundLightness = false;
 function GetBackgroundName ()
 {
 	return "Background" + (BackgroundLightness ? "Light" : "Dark");
@@ -45,10 +45,22 @@ function NewStackFrame (function_name) // Function name.
 		console.log("first");
 		StackFramesZone.appendChild(stackframe);
 	}
+
+	stackframe.className = "StackFrame " + GetBackgroundName();
 	var temp = stackframe.offsetWidth; // force browser to do transition for next statement
 	stackframe.classList.add("Expanded");
-	stackframe.innerHTML = function_name;
+
+	//stackframe.innerHTML = function_name;
 	StackFrames[StackFrames.length] = stackframe;
+
+
+	var name_obj = document.createElement("div");
+	name_obj.className = "FuncName";
+	name_obj.innerHTML = function_name;
+	stackframe.appendChild(name_obj);
+
+
+
 	return stackframe;
 }
 function DestroyStackFrame ()

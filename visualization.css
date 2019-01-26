@@ -6,6 +6,7 @@
 	//height: 100px;
 	transition: height 0.5s, opacity 0.5s;
 	opacity: 0;
+	position: relative;
 }
 .Expanded
 {
@@ -40,3 +41,9 @@
 	animation: Expansion 1s backwards;
 }
 */
+.FuncName
+{
+	font-family: monospace;
+	margin: 8px;
+	position: absolute;
+}
