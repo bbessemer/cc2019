@@ -27,50 +27,48 @@ var testAddFunc = {
     ]
 }
 
-function interpretFunction(func, args) {
-    var stackFrame = {}
+function interpretFunc(func, args) {
+    var stackFrame = {};
     for (var i = 0; i < func.args.length; i++) {
         stackFrame[func.args[i].name] = args[i];
+        animateVarDecl(func.args[i].name, args[i]);
     }
 
     for (var i = 0; i < func.code.length; i++) {
         let statement = func.code[i];
-        switch (statement.type) {
-            case "VarDecl":
-                if (arrLen != null) {
-                    // Array stuff
-                } else {
-                    stackFrame[statement.name] = interpretExpr(statement.val, stackFrame);
-                } break;
-            case "Assignment":
-                break;
-            default:
-                break;
+
+        if (statement.type == "VarDecl") {
+            stackFrame[statement.name] = animateVarDecl(statement.name, interpretExpr(statement.val, stackFrame))
+        } else if (statement.type == "Assignment") {
+            if (typeof(stackFrame[statement.name]) == "undefined") {
+                error("Variable " + statement.name + " is not defined.");
+            } else {
+                stackFrame[statement.name] = animateAssign(statement.name, interpretExpr(statement.val, stackFrame));
+            }
         }
     }
 }
 
 function interpretExpr(expr, stackFrame) {
-    if (typeof(expr) == "string") {
-        return stackFrame[expr];
-    } else {
-        switch (expr.type) {
-            case "Integer":
-                return expr.value;
-            case "Add":
-                if (expr.op == "+") {
-                    return interpretExpr(expr.lhs) + interpretExpr(expr.rhs);
-                } else {
-                    return interpretExpr(expr.lhs) - interpretExpr(expr.rhs);
-                }
-            case "Mult":
-                if (expr.op == "*") {
-                    return interpretExpr(expr.lhs) * interpretExpr(expr.rhs);
-                } else {
-                    return (interpretExpr(expr.lhs) / interpretExpr(expr.rhs)) | 0;
-                }
-            default:
-                return null;
+    if (expr.type == "Add") {
+        var lhs = interpretExpr(expr.lhs, stackFrame);
+        var rhs = interpretExpr(expr.rhs, stackFrame);
+        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number) {
+            error("Cannot add a non-number.");
+            return null;
         }
+
+        if (expr.op == "+") return animateAdd(lhs, rhs);
+        else return animateSubtract(lhs, rhs);
+    } else if (expr.type == "Mult") {
+        var lhs = interpretExpr(expr.lhs, stackFrame);
+        var rhs = interpretExpr(expr.rhs, stackFrame);
+        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number) {
+            error("Cannot add a non-number.");
+            return null;
+        }
+
+        if (expr.op == "*") return animateMultiply(lhs, rhs);
+        else return animateDivide(lhs, rhs);
     }
 }
