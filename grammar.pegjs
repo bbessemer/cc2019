@@ -1,16 +1,22 @@
-Program = Function*
+Program = funcs:Function* {
+	var program = {}
+    for (var i = 0; i < funcs.length; i++) {
+    	program[funcs[i].name] = funcs[i];
+    }
+    return program;
+}
 
 Function
 	= nameType:Declaration _ "(" argList:ArgList ")" _ code:Block _ {
     	return {
         	retType: nameType.type,
-            name: nameType.name,
+            name: nameType.name.name,
             args: argList,
             code
         }
     }
     
-ArgList = first:Declaration rest:((_ "," _ Declaration)*) {
+ArgList = first:Declaration? rest:((_ "," _ Declaration)*) {
 	for (var i = 0; i < rest.length; i++) {
     	rest[i] = rest[i][3];
     }
@@ -102,7 +108,7 @@ MultOp = "*" / "/"
 Primary = FnCall / Factor
 
 FnCall
-	= func:Symbol _ "(" _ firstArg:Expression _ restArgs:(_ "," _ Expression)*")" {
+	= func:Symbol _ "(" _ firstArg:Expression? _ restArgs:(_ "," _ Expression)*")" {
 	for (var i = 0; i < restArgs.length; i++) {
     	restArgs[i] = restArgs[i][3];
     }
@@ -123,15 +129,15 @@ Indexed = name:Symbol _ rhs:("[" _ Expression _ "]")? {
     else return name;
 }
 
-Symbol = [A-Za-z_][A-Za-z0-9_]* { return text(); }
+Symbol = [A-Za-z_][A-Za-z0-9_]* { return { type: "Symbol", name: text() } }
 
 Literal = Integer / String / Char
 
-Integer = [0-9]+ { return { type: "Integer", value: parseInt(text()) } }
+Integer = [0-9]+ { return { type: "Integer", val: parseInt(text()) } }
 
-String = "\"" str:([^\n"]*) "\"" { return { type: "String", value: str.join('') } }
+String = "\"" str:([^\n"]*) "\"" { return { type: "String", val: str.join('') } }
 
-Char = "'" char:[^\n] "'" { return { type: "Char", value: char }; }
+Char = "'" char:[^\n] "'" { return { type: "Char", val: char }; }
 
 _ = [ \n\t\r]*
 

@@ -27,8 +27,7 @@ var testAddFunc = {
     ]
 }
 
-function interpretFunc(func, args) {
-    var stackFrame = {};
+function interpretFunc(func, args, stackFrame) {
     for (var i = 0; i < func.args.length; i++) {
         stackFrame[func.args[i].name] = args[i];
         animateVarDecl(func.args[i].name, args[i]);
@@ -52,10 +51,12 @@ function interpretFunc(func, args) {
 function interpretExpr(expr, stackFrame) {
     if (expr.type == "Integer") {
         return animateSelect(expr);
+    } else if (expr.type == "Symbol");
+        return animateSelect(expr);
     } else if (expr.type == "Add") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
-        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number) {
+        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number") {
             error("Cannot add a non-number.");
             return null;
         }
@@ -66,11 +67,23 @@ function interpretExpr(expr, stackFrame) {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
         if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number) {
-            error("Cannot add a non-number.");
+            error("Cannot multiply a non-number.");
             return null;
         }
 
         if (expr.op == "*") return animateMultiply(lhs, rhs);
         else return animateDivide(lhs, rhs);
+    } else if (expr.type == "Compare") {
+        var lhs = interpretExpr(expr.lhs, stackFrame);
+        var rhs = interpretExpr(expr.rhs, stackFrame);
+        if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number) {
+            error("Cannot compare a non-number.");
+            return null;
+        }
+        
+        return animateCompare(expr.op, lhs, rhs);
+    } else if (expr.type == "FnCall") {
+        var stackFrame = { _animObject: NewStackFrame(expr.func) }
+        return interpretFunc(functions[expr.func.name], expr.args, stackFrame);
     }
 }
