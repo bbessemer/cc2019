@@ -54,8 +54,22 @@
 		<div id="Editor">
 			<div id="CodeArea"></div>
 		</div>
-		<button id="RunButton" type="button" style="position: absolute; bottom: 40px;left: calc(50% - 80px);">Run code</button>
-		<button id="NextButton" type="button" style="position: absolute; bottom: 40px;left: calc(50% + 20px);">Next section</button>
+		<div class="ExecutionButtonContainer" style="left: calc(50% - 70px);">
+			<button id="RunButton" type="button" class="ExecutionButton">
+				<img src="baseline-play_circle_outline-24px.svg" class="ExecutionButtonImage"></img>
+			</button>
+			<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
+				Run Code
+			</div></div>
+		</div>
+		<div class="ExecutionButtonContainer" style="left: calc(50% + 20px);">
+			<button id="NextButton" type="button" class="ExecutionButton">
+				<img src="baseline-arrow_forward-24px.svg" class="ExecutionButtonImage"></img>
+			</button>
+			<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
+				Next Section
+			</div></div>
+		</div>
 </div>
 <div id="EntireInfoView" class="PagePane" style="transform: translateX(calc(-100% + 25px))">
 	<img src="tabbutton.png" id="TabButton"></img>
