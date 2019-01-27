@@ -28,7 +28,7 @@ body
 	top: 0px;
 	width: 25%;
 	height: 100%;
-	overflow: hidden;
+	//overflow: hidden;
 }
 
 #InfoBox
@@ -39,14 +39,23 @@ body
 	top: 0px;
 	width: calc(100% - 25px);
 	height: 100%;
-
+	width: 100%;
 }
 
 #TabButton
 {
 	position: absolute;
-	top: calc(50%);
-	right: -0px;
+	width: 30px;
+	height: 60px;
+	top: calc(50% - 30px);
+	//left: 150%;
+
+	text-align: left;
+
+
+		//position: fixed;
+		//top: calc(50%);
+		right: -30px;
 }
 
 #TopSection

@@ -175,7 +175,7 @@ var VisualizerMainElement = document.getElementById("Visualizer");
 function MakeDummyFrameItem (variable_name, value_text/*string*/, x_position,y_position)
 {
 	var stackitem = document.createElement("div");
-	VisualizerMainElement.element.appendChild(stackitem);
+	VisualizerMainElement.appendChild(stackitem);
 	stackitem.className = "StackItem";
 
 	var ItemName = document.createElement("div");
@@ -200,8 +200,9 @@ function MakeDummyFrameItem (variable_name, value_text/*string*/, x_position,y_p
 	ItemValueText.innerHTML = "0";
 
 	stackitem.style.top = y_position + "px";
-	stackitem.style.left = x_position * 100 + "%";
+	stackitem.style.left = x_position + "px";
 	stackitem.style.width = STACKFRAME_ITEM_WIDTH_PROPORTION * 100 + "%";
+	stackitem.style["z-index"] = 100;
 	//console.log("next left will be " + stackframe.current_xpos);
 	ForceRecalculate(stackitem);
 	stackitem.classList.add("FadedIn");
@@ -209,6 +210,7 @@ function MakeDummyFrameItem (variable_name, value_text/*string*/, x_position,y_p
 	ItemValueText.innerHTML = value_text;
 
 	var out = stackitem;
+	return out;
 }
 function ClearVisualizer ()
 {
@@ -216,14 +218,15 @@ function ClearVisualizer ()
 }
 function ClonedStackItemGoesTo (element, x_pixels, y_pixels)
 {
-	element.left = x_pixels + "px";
-	element.right = y_pixels + "px";
+	element.style.left = x_pixels + "px";
+	element.style.top = y_pixels + "px";
 }
 function GetStackItemXY /* returns dictionary {x,y} */ (element)
 {
 	var xy =
 	{
-		x: element.getBoundingClientRect().left,
+		x: element.getBoundingClientRect().left
+			- VisualizerMainElement.getBoundingClientRect().left,
 
 		y:   element.getBoundingClientRect().top
 		   - VisualizerMainElement.getBoundingClientRect().top,

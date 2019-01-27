@@ -55,7 +55,9 @@ function interpretBlock(code, stackFrame) {
 
     function interpretStatement(statement) {
         if (statement.type == "VarDecl") {
-            stackFrame[statement.name.name] = interpretExpr(statement.val, stackFrame);
+            var val = interpretExpr(statement.val, stackFrame);
+            stackFrame[statement.name.name] = val;
+            anims.push(() => animateVarDecl(statement.name, val, stackFrame));
         } else if (statement.type == "Assignment") {
             if (typeof(stackFrame[statement.name.name]) == "undefined") {
                 error("Variable " + statement.name.name + " is not defined.");
@@ -101,10 +103,12 @@ function interpretExpr(expr, stackFrame) {
     } else if (expr.type == "Symbol") {
         anims.push(() => animateSelect(expr, stackFrame))
         return { type: "Integer", val: stackFrame[expr.name] }
+        return { type: "Integer", val: stackFrame[expr.name].val }
     } else if (expr.type == "Add") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
         if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number") {
+            console.log(lhs, rhs);
             error("Cannot add a non-number.");
             return null;
         }

@@ -20,10 +20,6 @@
 		<script src="lessons.js"></script>
 	</head>
 	<body style="overflow: hidden">
-<style>
-
-
-</style>
 		<div id="TextButtonsView" class="PagePane">
 			<div id="TopSection" style="text-align: center;">
 				<div id="TaskTitle">
@@ -33,8 +29,24 @@
 					Problem task goes here
 				</div>
 			</div>
+			<div class="ExecutionButtonContainer" style="left: calc(50% - 70px);">
+				<button id="RunButton" type="button" class="ExecutionButton">
+					<img src="baseline-play_circle_outline-24px.svg" class="ExecutionButtonImage"></img>
+				</button>
+				<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
+					Run Code
+				</div></div>
+			</div>
+			<div class="ExecutionButtonContainer" style="left: calc(50% + 20px);">
+				<button id="NextButton" type="button" class="ExecutionButton">
+					<img src="baseline-arrow_forward-24px.svg" class="ExecutionButtonImage"></img>
+				</button>
+				<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
+					Next Section
+				</div></div>
+			</div>
 		</div>
-		<div id="EntireCodeView" class="PagePane" style="transform: translateX(0%)">
+		<div id="EntireCodeView" class="PagePane"  style="transform: translateX(0%);">
 			<div id="TopSection" style="text-align: center;"></div>
 			<div id="Visualizer">
 				<div id="OperatorsArea">
@@ -75,11 +87,24 @@
 			</div></div>
 		</div>
 </div>
-<div id="EntireInfoView" class="PagePane" style="transform: translateX(calc(-100% + 25px))">
+<div id="EntireInfoView" class="PagePane" style="transform: translateX(-100%)">
+	<style>
+		#TabButton_Arrow
+		{
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition: transform 0.5s;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+	<div id="TabButton">
+		<img src="tabbutton.png" width=100% height=100%></img>
+		<img id="TabButton_Arrow" src="baseline-keyboard_arrow_right-24px.svg"
+		style = "transform: rotate(0deg);"></img>
 
-	<img src="tabbutton.png" id="TabButton">
-		<img src="baseline-keyboard_arrow_right-24px.svg" id="TabButton_Arrow"></img>
-	</img>
+	</div>
 	<div id="InfoBox">
 		<!-- Put info text stuff here -->
 		<div id="InfoTitle">
@@ -118,24 +143,6 @@
 
 	<script>
 
-		var A = NewStackFrame("oof");
-
-		NewFrameItem(A).innerHTML = "5";
-		NewFrameItem(A).innerHTML = "25";
-		NewFrameItem(A).innerHTML = "125";
-
-		var x;
-		var test = [
-		    //() => runCode(codeArea.GetText(), "add", [1, 2])
-		]
-		var doer;
-		var pos = 0;
-		function donext ()
-		{
-			if (pos >= test.length) clearInterval(doer);
-			else test[pos++]();
-		};
-		doer = setInterval(donext,1000);
 	</script>
 
 	<!--                          Debug tools code                             -->
