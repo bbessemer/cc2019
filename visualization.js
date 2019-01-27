@@ -38,7 +38,7 @@ var INITIAL_STACKFRAME_ITEMCREATE_YPOS = 30;
 var STACKFRAME_HEIGHT_GROWTH = 80;
 // top and bottom padding of 30 px, height of 60 px.
 // 30 px, 60 px, 30 px = 120 px initial ; 20 between rows = grow by 60+20=80 px
-var STACKFRAME_ITEMS_PER_ROW = 8;
+var STACKFRAME_ITEMS_PER_ROW = 6;
 var STACKFRAME_ITEM_WIDTH_PROPORTION = 1.0 / (STACKFRAME_ITEMS_PER_ROW + 2);
 
 

@@ -3,11 +3,26 @@
 <style>
 	#OperatorsArea
 	{
-		height: 350px;
+		height: 150px;
+		width:100%;
+		position: relative;
 	}
 	.Operator
 	{
-
+		width: 15%;
+		height: 70%;
+		position: absolute;
+		background-color: #999;
+		top: 15%;
+		text-align: center;
+	}
+	.OperatorSymbol
+	{
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		color: #555;
+		font-size: 48pt;
 	}
 	#PlusOp
 	{
@@ -25,15 +40,45 @@
 	{
 		left: 80%;
 	}
+	#Visualizer
+	{
+		overflow: hidden;
+		width: 60%;
+		height: 80%;
+		border: 1px solid black;
+	}
+	#TopSection
+	{
+		height: 19%;
+	}
 </style>
-<div id="OperatorsArea">
-	<div class="Operator">
-		<div class="OperatorSymbol">
-
+<div id="EntirePage">
+	<div id="TopSection">
+		Yo man here some kinda visualizer or somethin
+	</div>
+	<div id="Visualizer">
+		<div id="OperatorsArea">
+			<div class="Operator" id="PlusOp">
+				<div class="OperatorSymbol">+</div>
+			</div>
+			<div class="Operator" id="MinusOp">
+				<div class="OperatorSymbol">-</div>
+			</div>
+			<div class="Operator" id="MultOp">
+				<div class="OperatorSymbol">*</div>
+			</div>
+			<div class="Operator" id="DivOp">
+				<div class="OperatorSymbol">/</div>
+			</div>
 		</div>
+		<div id="StackFramesZone"></div>
 	</div>
 </div>
-<div id="StackFramesZone"></div>
+
+
+
+
+
 <script src="visualization.js"></script>
 <script src="interpreter.js"></script>
 <script src="viewmodel.js"></script>
@@ -82,7 +127,6 @@ doer = setInterval(donext,1000);
 
 
 </script>
-
 
 
 
