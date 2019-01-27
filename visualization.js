@@ -149,13 +149,56 @@ function NewFrameItem (stackframe, variable_name)
 	ItemNameText.innerHTML = variable_name;
 	ItemValueText.innerHTML = "0";
 
-	stackitem.style.top = stackframe.current_ypos + "px";
-	stackitem.style.left = stackframe.current_xpos * 100 + "%";
+	var xpos = stackframe.current_xpos;
+	var ypos = stackframe.current_ypos;
+	stackitem.style.top = ypos + "px";
+	stackitem.style.left = xpos * 100 + "%";
 	stackitem.style.width = STACKFRAME_ITEM_WIDTH_PROPORTION * 100 + "%";
 	stackframe.current_xpos += STACKFRAME_ITEM_WIDTH_PROPORTION;
 	//console.log("next left will be " + stackframe.current_xpos);
 	ForceRecalculate(stackitem);
 	stackitem.classList.add("FadedIn");
 
-	return ItemValueText;
+	var out =
+	{
+		stackframe: stackframe,
+		container_element: stackitem,
+		valuetext_element: ItemValueText,
+		//xposition: xpos,
+		//yposition: ypos,
+	};
+	return out;
+}
+function ClearVisualizer ()
+{
+	while (StackFrames.length >= 1) DestroyStackFrame();
+}
+var VisualizerMainElement = document.getElementById("Visualizer");
+function ClonedStackItemGoesTo (element, x_pixels, y_pixels)
+{
+	element.left = x_pixels + "px";
+	element.right = y_pixels + "px";
+}
+function GetStackItemXY /* returns dictionary {x,y} */ (element)
+{
+	var xy =
+	{
+		x: stack_item.stackframe.element.getBoundingClientRect().left,
+
+		y:   stack_item.stackframe.element.getBoundingClientRect().top
+		   - VisualizerMainElement.getBoundingClientRect().top,
+
+
+	};
+	return xy;
+}
+function CloneStackItem (stack_item /*the dictionary returned by NewFrameItem, not an element*/)
+{
+	var cloned = stack_item.container_element.cloneNode();
+	var ypos = GetStackItemXY(stack_item.stackframe.element).y;
+	console.log("pos diff: " + ypos);
+	cloned.classList.add("ClonedStackItem");
+	cloned.style.top = ypos + "px";
+	VisualizerMainElement.appendChild(cloned);
+	return cloned;
 }
