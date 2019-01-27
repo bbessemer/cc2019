@@ -75,7 +75,7 @@
 		</div>
 </div>
 <div id="EntireInfoView" class="PagePane" style="transform: translateX(calc(-100% + 25px))">
-	
+
 	<img src="tabbutton.png" id="TabButton">
 		<img src="baseline-keyboard_arrow_right-24px.svg" id="TabButton_Arrow"></img>
 	</img>
@@ -109,44 +109,7 @@
 		</script>
 	</body>
 
-	<script>
-		var EntireCodeView = document.getElementById("EntireCodeView");
-		var EntireInfoView = document.getElementById("EntireInfoView");
-		var correctAnswer = '';
-
-		function ChangeWorkAreaText(title, problem, infotitle, info, desired)
-		{
-			document.getElementById('TaskTitle').innerHTML = title;
-			document.getElementById('TaskDescription').innerHTML = problem;
-			document.getElementById('InfoTitle').innerHTML = infotitle;
-			document.getElementById('InfoText').innerHTML = info;
-			correctAnswer = desired;
-		}
-
-		function ShowCodeView()
-		{
-			EntireCodeView.style = "transform: translateX(0%)";
-			EntireInfoView.style = "transform: translateX(calc(-100% + 25px))";
-		}
-
-		function ShowInfoView()
-		{
-			EntireCodeView.style = "transform: translateX(calc(25% - 40px))";
-			EntireInfoView.style = "transform: translateX(0%)";
-		}
-
-		var IsOnCodeView = true;
-
-		document.getElementById('TabButton').onclick = function()
-		{
-			if (IsOnCodeView) ShowInfoView();
-			else ShowCodeView();
-			IsOnCodeView = !IsOnCodeView;
-		}
-
-		//document.getElementById('TabButton').onclick = ToggleView();
-	</script>
-
+	<script src="work_area.js" type="text/javascript"></script>
 	<script src="visualization.js"></script>
 
 
