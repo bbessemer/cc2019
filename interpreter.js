@@ -87,9 +87,9 @@ function interpretBlock(code, stackFrame) {
 function interpretExpr(expr, stackFrame) {
     console.log(expr)
     if (expr.type == "Integer") {
-        return animateSelect(expr);
+        return animateSelect(expr, stackFrame);
     } else if (expr.type == "Symbol") {
-        return animateSelect(expr);
+        return animateSelect(expr, stackFrame);
     } else if (expr.type == "Add") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
@@ -98,8 +98,8 @@ function interpretExpr(expr, stackFrame) {
             return null;
         }
 
-        if (expr.op == "+") return animateAdd(lhs, rhs);
-        else return animateSubtract(lhs, rhs);
+        if (expr.op == "+") return animateAdd(lhs, rhs, stackFrame);
+        else return animateSubtract(lhs, rhs, stackFrame);
     } else if (expr.type == "Mult") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
@@ -108,8 +108,8 @@ function interpretExpr(expr, stackFrame) {
             return null;
         }
 
-        if (expr.op == "*") return animateMultiply(lhs, rhs);
-        else return animateDivide(lhs, rhs);
+        if (expr.op == "*") return animateMultiply(lhs, rhs, stackFrame);
+        else return animateDivide(lhs, rhs, stackFrame);
     } else if (expr.type == "Compare") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
@@ -118,9 +118,9 @@ function interpretExpr(expr, stackFrame) {
             return null;
         }
 
-        return animateCompare(expr.op, lhs, rhs);
+        return animateCompare(expr.op, lhs, rhs, stackFrame);
     } else if (expr.type == "FnCall") {
         var stackFrame = { _animObject: NewStackFrame(expr.func) }
-        return interpretFunc(functions[expr.func.name], expr.args, stackFrame);
+        return interpretFunc(functions[expr.func.name.name], expr.args, stackFrame);
     }
 }

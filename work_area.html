@@ -46,10 +46,12 @@
 				</div>
 				<div id="StackFramesZone"></div>
 			</div>
-		</div>
+
 
 		<!-- Our code area element -->
 		<div id="CodeArea"></div>
+</div>
+		<button id="RunButton" type="button" style="position: absolute;bottom: 40px;left: calc(50% - 40px);">Run</button>
 
 		<!-- Our local script -->
 		<script>
@@ -62,7 +64,11 @@
 	return x; // your mom gay
 }`);
 
-
+			document.getElementById('RunButton').onclick = function()
+			{
+				//ClearVisualizer();
+				runCode(codeArea.GetText(), "add", [1, 2]);
+			}
 		</script>
 	</body>
 
@@ -89,7 +95,7 @@
 
 	var x;
 	var test = [
-	    () => runCode(codeArea.GetText(), "add", [1, 2])
+	    //() => runCode(codeArea.GetText(), "add", [1, 2])
 	]
 	var doer;
 	var pos = 0;
