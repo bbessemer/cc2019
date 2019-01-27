@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title id="WindowTitle">Window Title</title>
+		<link rel="stylesheet" type="text/css" href="index_style.css">
+		<!-- Style has to be embedded within file for ace -->
+		<style type="text/css" media="screen">
+			#CodeArea
+			{
+				position: absolute;
+				width: 600px;
+				height: 400px;
+			}
+		</style>
+	</head>
+  <style>
+    #CodeArea {
+      position: absolute;
+      bottom: 150px;
+    }
+  </style>
+
+	<body>
+		<h2 id="LessonTitle">LessonTitle</h2>
+
+    <h3 id="SlideTitle">SlideTitle</h3>
+    <p id="SlideContent">Content</p>
+		<!-- Our code area element -->
+		<div id="CodeArea"></div>
+
+    <button type="button" id="PreviousButton" onclick="PreviousButtonClick()">Previous</button>
+    <button type="button" id="NextButton" onclick="NextButtonClick()">Next</button>
+	</body>
+
+  <script src="lessons.js" type="text/javascript" charset="utf-8"></script>
+  <script src="syntax.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+        document.getElementById("LessonTitle").innerHTML = lesson.title;
+
+        document.getElementById("SlideTitle").innerHTML = slide.title;
+        document.getElementById("SlideContent").innerHTML = slide.content[content_index];
+
+        //document.getElementById("PreviousButton").disabled = true;
+  </script>
+
+	<script src="index_interaction.js"></script>
+
+	<!-- Our code area scripts -->
+	<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<!-- fancy latin crap? -->
+	<script src="code_area.js" type="text/javascript" charset="utf-8"></script>
+	<script src="interpreter.js" type="text/javascript" charset="utf-8"></script>
+	<!-- Our local script -->
+	<script>
+		//Creates the code editor out of an iframe
+		var codeArea = window.CreateCodeArea();
+		codeArea.CreateEditor("CodeArea", "int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\";\n\treturn x;\n}\n")
+
+	</script>
+
+	<!--                          Debug tools code                             -->
+	<script>
+    document.addEventListener("keydown", function (e)
+		{
+			if (e.which === 123) window.OpenDevTools();
+			else if (e.which === 116) location.reload();
+    });
+	</script>
+
+</html>
