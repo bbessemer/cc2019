@@ -5,6 +5,13 @@ body
 	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
 }
 
+#EntireCodeView
+{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
 #TopSection
 {
 	height: 19%;
