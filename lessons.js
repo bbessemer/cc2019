@@ -1,5 +1,4 @@
-{
-	"lessons": [
+var lessons =  [
 		{
 			"title": "Environment",
 			"script": {
@@ -88,5 +87,4 @@
 				]
 			}
 		}
-	]
-}
+]
