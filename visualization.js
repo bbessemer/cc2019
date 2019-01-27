@@ -183,9 +183,9 @@ function GetStackItemXY /* returns dictionary {x,y} */ (element)
 {
 	var xy =
 	{
-		x: stack_item.stackframe.element.getBoundingClientRect().left,
+		x: element.getBoundingClientRect().left,
 
-		y:   stack_item.stackframe.element.getBoundingClientRect().top
+		y:   element.getBoundingClientRect().top
 		   - VisualizerMainElement.getBoundingClientRect().top,
 
 
