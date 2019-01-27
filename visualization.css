@@ -132,4 +132,5 @@
 .ClonedStackItem
 {
 	transition: left 0.5s, top 0.5s;
+	z-index: 99;
 }

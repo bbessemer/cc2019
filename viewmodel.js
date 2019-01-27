@@ -11,11 +11,11 @@ this.animateSelect = (elem, stackFrame) => {
     if (elem.type == "Symbol") {
         selected = CloneStackItem(frameItems[elem.name]);
     } else if (elem.type == "Integer") {
-        selected = NewFrameItem(stackFrame._animObject, "");
-        selected.valuetext_element.innerHTML = elem.val;
+        selected = MakeDummyFrameItem("", elem.val, 0, 0);
     }
-    var {x, y} = GetStackItemXY(selected.valuetext_element)
-    ClonedStackItemGoesTo(selected, x, y - 100);
+    console.log(selected)
+    var {x, y} = GetStackItemXY(selected)
+    ClonedStackItemGoesTo(selected, x, y - 120);
     currentOperands.push(selected);
     currentResult = selected;
 }
@@ -36,6 +36,7 @@ this.animateOp = (op, result, stackFrame) => {
         case "*": signCoords = getRectCenter("MultOp"); break;
         case "/": signCoords = getRectCenter("DivOp"); break;
     }
+    console.log(currentOperands, signCoords);
     ClonedStackItemGoesTo(currentOperands[0], signCoords.x, signCoords.y);
     ClonedStackItemGoesTo(currentOperands[1], signCoords.x, signCoords.y);
     setTimeout(() => {
@@ -56,6 +57,7 @@ var animator;
 
 this.runAnims = () => {
     var len = anims.length;
+    console.log(anims)
     var i = 0;
     var interval = setInterval(() => {
         if (i >= len) clearInterval(interval);

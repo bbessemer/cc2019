@@ -216,8 +216,8 @@ function ClearVisualizer ()
 }
 function ClonedStackItemGoesTo (element, x_pixels, y_pixels)
 {
-	element.left = x_pixels + "px";
-	element.right = y_pixels + "px";
+	element.style.left = x_pixels + "px";
+	element.style.top = y_pixels + "px";
 }
 function GetStackItemXY /* returns dictionary {x,y} */ (element)
 {
