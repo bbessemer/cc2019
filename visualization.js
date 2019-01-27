@@ -169,11 +169,51 @@ function NewFrameItem (stackframe, variable_name)
 	};
 	return out;
 }
+var VisualizerMainElement = document.getElementById("Visualizer");
+
+/* returns the dom element, not a dictonary. is a child of the visualizer main element, not a stack frame. */
+function MakeDummyFrameItem (variable_name, value_text/*string*/, x_position,y_position)
+{
+	var stackitem = document.createElement("div");
+	VisualizerMainElement.element.appendChild(stackitem);
+	stackitem.className = "StackItem";
+
+	var ItemName = document.createElement("div");
+	ItemName.className = "StackItemNameBox";
+	stackitem.appendChild(ItemName);
+
+	var ItemNameText = document.createElement("div");
+	ItemNameText.className = "StackItemName";
+	ItemName.appendChild(ItemNameText);
+
+	var ItemValue = document.createElement("div");
+	ItemValue.className = "StackItemValueBox";
+	stackitem.appendChild(ItemValue);
+
+	var ItemValueText = document.createElement("div");
+	ItemValueText.className = "StackItemValue";
+	ItemValue.appendChild(ItemValueText);
+
+	ItemValue.style["background-color"] = "#" + GetNextColor();
+
+	ItemNameText.innerHTML = variable_name;
+	ItemValueText.innerHTML = "0";
+
+	stackitem.style.top = y_position + "px";
+	stackitem.style.left = x_position * 100 + "%";
+	stackitem.style.width = STACKFRAME_ITEM_WIDTH_PROPORTION * 100 + "%";
+	//console.log("next left will be " + stackframe.current_xpos);
+	ForceRecalculate(stackitem);
+	stackitem.classList.add("FadedIn");
+
+	ItemValueText.innerHTML = value_text;
+
+	var out = stackitem;
+}
 function ClearVisualizer ()
 {
 	while (StackFrames.length >= 1) DestroyStackFrame();
 }
-var VisualizerMainElement = document.getElementById("Visualizer");
 function ClonedStackItemGoesTo (element, x_pixels, y_pixels)
 {
 	element.left = x_pixels + "px";
@@ -202,4 +242,8 @@ function CloneStackItem (stack_item /*the dictionary returned by NewFrameItem, n
 	VisualizerMainElement.appendChild(cloned);
 	ForceRecalculate(cloned);
 	return cloned;
+}
+function GetStackFirstRowY (stackframe_element /*dom element, not the NewStackFrame() dictionary object*/)
+{
+	return stackframe_element.getBoundingClientRect().top + INITIAL_STACKFRAME_ITEMCREATE_YPOS;
 }
