@@ -15,7 +15,7 @@ function createWindow()
 		icon: "icon.png"
 	})
 
-	window.loadFile('index.html')
+	window.loadFile('presentation.html')
 	window.setMenu(null)
 	window.webContents.openDevTools()
 

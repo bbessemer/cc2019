@@ -11,7 +11,7 @@ function ChangeWorkAreaText(title, problem, infotitle, info, desired)
 	correctAnswer = desired;
 }
 
-ChangeWorkAreaText(lesson.title, lesson.slides[0].problem, "", "", lesson.slides[0].answer);
+ChangeWorkAreaText(lesson.title, lesson.slides[1].problem, "", "", lesson.slides[1].answer);
 
 var EntireCodeView = document.getElementById("EntireCodeView");
 var EntireInfoView = document.getElementById("EntireInfoView");
