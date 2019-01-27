@@ -5,7 +5,7 @@ var lesson_index = 0;
 var content_index = 0;
 var problem_index = 0;
 
-var lesson = lessons[lesson_index];
+var lesson = lessons[0];
 var slide = lesson.slides[0];
 
 // TODO: Implement lesson indexing
@@ -63,9 +63,12 @@ function NextButtonClick()
 
   if (content_index == slide.content.length - 1 &&
     slide_index == lesson.slides.length - 1 &&
-    lesson_index == lessons.length - 2) {
-    document.getElementById("NextButton").disabled = true;
-  }
+    lesson_index == lessons.length - 2)
+		{
+			lesson = lessons[2];
+			window.location.href = "work_area.html";
+			//ChangeWorkAreaText(lesson.title, lesson.slides[0].problem, "", "", lesson.slides[0].answer);
+  	}
 
   document.getElementById("PreviousButton").disabled = false;
 }
