@@ -1,4 +1,6 @@
 let correctAnswer = '';
+var index = 0;
+var lesson = lessons[2];
 
 function ChangeWorkAreaText(title, problem, infotitle, info, desired)
 {
@@ -8,6 +10,8 @@ function ChangeWorkAreaText(title, problem, infotitle, info, desired)
 	document.getElementById('InfoText').innerHTML = info;
 	correctAnswer = desired;
 }
+
+ChangeWorkAreaText(lesson.title, lesson.slides[0].problem, "", "", lesson.slides[0].answer);
 
 var EntireCodeView = document.getElementById("EntireCodeView");
 var EntireInfoView = document.getElementById("EntireInfoView");
@@ -31,4 +35,10 @@ document.getElementById('TabButton').onclick = function()
 	if (IsOnCodeView) ShowInfoView();
 	else ShowCodeView();
 	IsOnCodeView = !IsOnCodeView;
+}
+
+document.getElementById('NextButton').onclick = function ()
+{
+	index++;
+	ChangeWorkAreaText(lesson.title, lesson.slides[index].problem, "", "", lesson.slides[index].answer);
 }
