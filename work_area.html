@@ -49,19 +49,21 @@
 
 
 		<!-- Our code area element -->
-		<div id="CodeArea"></div>
+		<div id="Editor">
+			<div id="CodeArea"></div>
+		</div>
 </div>
 		<button id="RunButton" type="button" style="position: absolute;bottom: 40px;left: calc(50% - 40px);">Run</button>
 
 		<!-- Our local script -->
 		<script>
 			//Creates the code editor out of an iframe
-			var codeArea = window.CreateCodeArea();
-			codeArea.CreateEditor("CodeArea",
+			var codeArea = window.CreateCodeArea(800, 800);
+			codeArea.CreateEditor("CodeArea", "Editor",
 `int add (int a, int b)
 {
 	int x = a + b; /* block comment */
-	return x; // your mom gay
+	return x; //Oh man, I love working with APIs
 }`);
 
 			document.getElementById('RunButton').onclick = function()
