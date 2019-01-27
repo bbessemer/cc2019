@@ -243,3 +243,7 @@ function CloneStackItem (stack_item /*the dictionary returned by NewFrameItem, n
 	ForceRecalculate(cloned);
 	return cloned;
 }
+function GetStackFirstRowY (stackframe_element /*dom element, not the NewStackFrame() dictionary object*/)
+{
+	return stackframe_element.getBoundingClientRect().top + INITIAL_STACKFRAME_ITEMCREATE_YPOS;
+}
