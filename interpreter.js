@@ -58,7 +58,7 @@ function interpretFunc(func, args, stackFrame) {
         animateVarDecl(func.args[i].name.name, args[i], stackFrame);
     }
 
-    return interpretBlock(func.code, stackFrame);    
+    return interpretBlock(func.code, stackFrame);
 }
 
 function interpretBlock(code, stackFrame) {
@@ -116,7 +116,7 @@ function interpretBlock(code, stackFrame) {
     }
 
     for (var i = 0; i < code.length; i++) {
-        interpretStatement(code[i]); 
+        interpretStatement(code[i]);
     }
 }
 
@@ -153,7 +153,7 @@ function interpretExpr(expr, stackFrame) {
             error("Cannot compare a non-number.");
             return null;
         }
-        
+
         return animateCompare(expr.op, lhs, rhs);
     } else if (expr.type == "FnCall") {
         var stackFrame = { _animObject: NewStackFrame(expr.func) }
