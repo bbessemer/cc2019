@@ -5,11 +5,48 @@ body
 	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
 }
 
+.PagePane
+{
+	transition: transform 0.5s;
+	position: absolute;
+
+	width: 100%;
+	height: 100%;
+}
+
 #EntireCodeView
 {
+	margin: 0px;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+}
+
+#EntireInfoView
+{
+	margin: 0px;
+	top: 0px;
+	width: 25%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#InfoBox
+{
+	color: #CCC;
+	background-color: #444;
+	margin: 0px;
+	top: 0px;
+	width: calc(100% - 25px);
+	height: 100%;
+
+}
+
+#TabButton
+{
+	position: absolute;
+	top: calc(50%);
+	right: -0px;
 }
 
 #TopSection
@@ -19,11 +56,13 @@ body
 	padding: 10px;
 	height: 100px;
 }
+
 #TaskTitle
 {
 	font-weight: bolder;
 	font-size: 18pt;
 }
+
 #TaskDescription
 {
 	padding-top: 8px;
