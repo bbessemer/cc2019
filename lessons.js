@@ -1,90 +1,115 @@
 var lessons =  [
-		{
-			"title": "Environment",
-			"script": {
-				"overview": [
-					"This is the prompt. It helps to keep in mind what you are trying to learn.",
-					"The code frame is where you can read and write code. It also has effects to emphasize parts of the code.",
-					"The visualizer frame gives a graphical representation of everything your code does.",
-					"When going through a lesson or executing code, take care to see how it is being visualized.",
-					"These buttons allow you execute and step through your code. The visualizer frame will give you graphical feedback on what each line is doing."
-				]
-			}
-		},
-		{
-			"title": "Syntax",
-			"script": {
-				"code": [
-					"int x",
-					" = 4",
-					";"
-				],
-				"introduction": [
+	{
+		"title": "Syntax",
+		"slides": [
+			{
+				"title": "introduction",
+				"content": [
 					"This is an example of a statement. For this lesson, we are going to go through the grammar (i.e. syntax) of this simple statement.",
 					"But first, let's address this statement in halves."
 				],
-				"variable": [
-					"`x`, just like in math, is a variable. It's a placeholder for whatever value we assign to it."
+				"code": "int x = 1;"
+			},
+			{
+				"title": "Variables",
+				"content": [
+					"Just like in math, the `x` is a variable; a placeholder for a value."
 				],
-				"type": [
-					"The `int` designates that the `data type` of variable `x` is an integer, and can store integer values.",
-					"There are other types that we can make `x`, but that will be covered later"
-				],
-				"declaration": [
-					"This statement is known as a `declaration`. It simply declares that an integer variable named 'x' exists, no value has been assigned to it."
-				],
-				"assignment": [
-					"The equal sign, just like in math, represents assigning a value to the varibale; in this case, 4."
-				],
-				"semicolon": [
-					"Most programming languages require that statements end with a semicolons."
-				],
-				"definition": [
-					"The latter half of this statement is known as the `definition`, i.e. defining the value of the variable."
-				],
-				"conclusion": [
-					"By combinding the declaration and the definiton, we are able to construct a simple declarative statement."
-				]
-			}
-		},
-		{
-			"title": "Data Types",
-			"scripts": {
-				"code": [
-					"int x = 4;",
-					"float x = 4.0;",
-					"char x = 'A';",
-					"bool x = true;"
-				],
-				"introduction": [
-					"In the previous lesson we learned that `int` is a data type to use integers. Here we will go over other data types."
-				],
-				"int": [
-					"`int` stores integer values."
-				],
-				"float": [
-					"`float` stores decimal values."
-				],
-				"char": [
-					"`char` variables store a single alpha-numeric character."
-				],
-				"bool": [
-					"The `bool`data type only has two values; true or false. This makes them useful for writing logic in our program."
+				"code": "int x;"
+			},
+			{
+				"title": "Types",
+				"content": [
+					"The `int` designates that the `data type` of variable `x` is an integer and `x`can store integer values.",
+					"There are other data types that we can make `x`, but that will be covered later"
 				]
 			},
-			"practice": {
-				"code": [
-					"floatvelocity;",
-					"char",
-					"intwheels=4;",
-					"boolflying=false;"
-				],
-				"problems": [
-					"Declare a float called `velocity'.",
-					"What data type would be most useful for a teacher to store letter grades",
-					"Declare an int called `wheels` with the number of wheels a car has",
-					"Use a boolean variable called `flying' to store whether or not you are flying"
+			{
+				"title": "Declarations",
+				"content": [
+					"This statement is known as a `declaration`. It simply declares that an integer variable named 'x' exists, no value has been assigned to it."
 				]
+			},
+			{
+				"title": "Assignments",
+				"content": [
+					"The equal sign, just like in math, represents assigning a value to the varibale; in this case, 4."
+				],
+				"code": "x = 4;"
+			},
+			{
+				"title": "Semicolons",
+				"content": [
+					"Most programming languages require that statements end with a semicolons."
+				]
+			},
+			{
+				"title": "Definitions",
+				"content": [
+					"The latter half of this statement is known as the `definition`, i.e. defining the value of the variable."
+				]
+			},
+			{
+				"title": "Conclusion",
+				"content": [
+					"By combinding the declaration and the definiton, we are able to construct a simple declarative statement."
+				],
+				"code": "int x = 4;"
 			}
-		}
+		]
+	},
+	{
+		"title": "Data Types",
+		"slides": [
+			{
+				"title": "Introduction",
+				"content": [
+					"In the previous lesson we learned about our first data type, `int`. Here we will learn about other data types."
+				]
+			},
+			{
+				"title": "int",
+				"content": [
+					"This declaration is the same as the last lesson; `int` stores integer values."
+				],
+				"code": "int a = 4;"
+			},
+			{
+				"title": "float",
+				"content": [
+					"`float` stores decimal values."
+				],
+				"code": "float b = 9.8;"
+			},
+			{
+				"title": "char",
+				"content": [
+					"Variables with the data type `char` store a single alpha-numeric character. That alpha-numeric character is required to be encased in single quotations."
+				],
+				"code": "char c = 'A';"
+			},
+			{
+				"title": "bool",
+				"content": [
+					"`bool` variables store only two values: true and false. This makes them useful for implementing logic."
+				],
+				"code": "bool d = true;"
+			}
+		]
+	},
+	{
+		"title": "Practice",
+		"answers": [
+			"floatvelocity;",
+			"char",
+			"intwheels=4;",
+			"boolflying=false;"
+		],
+		"problems": [
+			"Declare a float called `velocity'.",
+			"What data type would be most useful for a teacher to store letter grades",
+			"Declare an int called `wheels` with the number of wheels a car has",
+			"Use a boolean variable called `flying' to store whether or not you are flying"
+		]
+	}
 ]
