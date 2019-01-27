@@ -9,31 +9,29 @@
 			#CodeArea
 			{
 				position: absolute;
-				width: 300px;
-				height: 400px;
+				width: 800px;
+				height: 600px;
 			}
 		</style>
 	</head>
 	<body>
 		<div id="TaskDescription">Task Description</div>
-		<h1>Hello World!</h1>
-		<div class="redbox">
-			We are using node <script>document.write(process.versions.node)</script>,
-			Chrome <script>document.write(process.versions.chrome)</script>,
-			and Electron <script>document.write(process.versions.electron)</script>.
-		</div>
-		<br>
 
-		
-
-		<a href="code_editor.html">Code Editor</a>
-		<a href="visualization.html">Visualization</a>
-		<a href="work_area.html">Work Area</a>
+		<!-- Our code area element -->
+		<div id="CodeArea"></div>
 	</body>
 
 	<script src="index_interaction.js"></script>
+	<!-- Our code area scripts -->
+	<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script src="code_area.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		//Creates the code editor out of an iframe
+		var codeArea = window.CreateCodeArea();
+		codeArea.CreateEditor("CodeArea", "int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\";\n\treturn x;\n}\n")
+	</script>
 
-	<!-- Debug tools code -->
+	<!--                          Debug tools code                             -->
 	<script>
     document.addEventListener("keydown", function (e)
 		{
