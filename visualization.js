@@ -153,7 +153,7 @@ function NewFrameItem (stackframe, variable_name)
 	stackitem.style.left = stackframe.current_xpos * 100 + "%";
 	stackitem.style.width = STACKFRAME_ITEM_WIDTH_PROPORTION * 100 + "%";
 	stackframe.current_xpos += STACKFRAME_ITEM_WIDTH_PROPORTION;
-	console.log("next left will be " + stackframe.current_xpos);
+	//console.log("next left will be " + stackframe.current_xpos);
 	ForceRecalculate(stackitem);
 	stackitem.classList.add("FadedIn");
 

@@ -17,19 +17,17 @@
 		<script src="interpreter.js"></script>
 		<script src="viewmodel.js"></script>
 		<script src="parser.js"></script>
-		<style>
-		#TopSection
-		{
-			height: 19%;
-		}
-		</style>
 	</head>
 	<body>
 
 		<div id="EntirePage">
 			<div id="TopSection" style="text-align: center;">
-				<div id="TaskDescription">Task Description</div>
-				Yo man here some kinda visualizer or somethin
+				<div id="TaskTitle">
+					Task Description
+				</div>
+				<div id="TaskDescription">
+					Yo man here some kinda visualizer or somethin
+				</div>
 			</div>
 			<div id="Visualizer">
 				<div id="OperatorsArea">
@@ -57,24 +55,29 @@
 		<script>
 			//Creates the code editor out of an iframe
 			var codeArea = window.CreateCodeArea();
-			codeArea.CreateEditor("CodeArea", "int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\";\n\treturn x;\n}\n")
+			codeArea.CreateEditor("CodeArea",
+`int add (int a, int b)
+{
+	int x = a + b; /* block comment */
+	return x; // your mom gay
+}`);
 
 
 		</script>
-
 	</body>
 
 	<!--                          Debug tools code                             -->
 	<script>
     document.addEventListener("keydown", function (e)
 		{
-			if (e.which === 123) window.OpenDevTools();
+			if (e.which === 123) require("remote").window.OpenDevTools();
 			else if (e.which === 116) location.reload();
     });
 	</script>
 
 	<script src="visualization.js"></script>
 
+<!-- Test script to make stuff animate in the Visualizer area -->
 
 	<script>
 
@@ -86,27 +89,7 @@
 
 	var x;
 	var test = [
-		function(){
-			x = NewStackFrame("main");
-			//x.style = "background-color: #000;";
-			//x.style = "height: " + n + "px;";
-		},
-		function(){
-			x.style = "height: 400px;";
-		},
-		function(){
-			NewFrameItem(x).innerHTML = "5";
-		},
-		function(){
-			NewFrameItem(x).innerHTML = "25";
-		},
-		function(){
-			NewFrameItem(x).innerHTML = "125";
-		},
-		function(){NewStackFrame("foo");},
-	    function(){DestroyStackFrame();},
-		function(){DestroyStackFrame();},
-	    addTest
+	    () => runCode(codeArea.GetText(), "add", [1, 2])
 	]
 	var doer;
 	var pos = 0;
@@ -120,6 +103,7 @@
 
 
 	</script>
+
 
 
 </html>

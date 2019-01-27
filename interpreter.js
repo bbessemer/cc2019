@@ -1,32 +1,3 @@
-var testAddFunc = {
-    "retType": "int",
-    "name": "add",
-    "args": [
-        {
-            "type": "int",
-            "name": "a"
-        },
-        {
-            "type": "int",
-            "name": "b"
-        }
-    ],
-    "code": [
-        {
-            "type": "VarDecl",
-            "varType": "int",
-            "name": "x",
-            "arrLen": undefined,
-            "val": {
-                "type": "Add",
-                "op": "+",
-                "lhs": "a",
-                "rhs": "b"
-            }
-        }
-    ]
-}
-
 let addText = `
 int add(int a, int b)
 {
@@ -35,6 +6,8 @@ int add(int a, int b)
 }`
 
 function runCode(text, funcName, args) {
+    text = text.replace(/\/\/.*\n/g, "\n")
+    text = text.replace(/\/\*.*\*\//g, "")
     var program = parser.parse(text);
     for (var i = 0; i < args.length; i++) {
         args[i] = { type: "Integer", val: args[i] };
@@ -42,24 +15,6 @@ function runCode(text, funcName, args) {
     var stackFrame = { _animObject: NewStackFrame(funcName) };
     interpretFunc(program[funcName], args, stackFrame);
 }
-
-function addTest() {
-    var add = parser.parse(addText).add;
-    console.log(add);
-    interpretFunc(add,
-                  [
-                      {
-                          type: "Integer",
-                          val: 1
-                      },
-                      {
-                          type: "Integer",
-                          val: 2
-                      }
-                  ],
-                  { _animObject: NewStackFrame("add") });
-}
-
 
 function interpretFunc(func, args, stackFrame) {
     for (var i = 0; i < func.args.length; i++) {

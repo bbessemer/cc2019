@@ -1,11 +1,26 @@
 body
 {
-	background-color: #222;
+	background-color: #333;
+
+	font-family: Arial,Helvetica Neue,Helvetica,sans-serif;
 }
 
-#TaskDescription
+#TopSection
+{
+	height: 19%;
+	color: #CCC;
+	padding: 10px;
+	height: 100px;
+}
+#TaskTitle
 {
 	font-weight: bolder;
+	font-size: 18pt;
+}
+#TaskDescription
+{
+	padding-top: 8px;
+	font-size: 14pt;
 }
 
 #OperatorsArea
@@ -53,17 +68,19 @@ body
 	overflow: hidden;
 	//width: 60%;
 	//height: 80%;
-	height: 900px;
-	border: 1px solid black;
+	height: 800px;
+	border: 1px solid #666;
     box-sizing: border-box;
 	position: absolute;
 	left: 810px;
 	width: calc(100% - 815px);
+
+	background-color: #444;
 }
 
 #CodeArea
 {
 	position: absolute;
 	width: 800px;
-	height: 900px;
+	height: 800px;
 }
