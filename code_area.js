@@ -1,28 +1,44 @@
 
-function CreateCodeArea(w = 800, h = 600, text = '')
+function CreateCodeArea(w = 600, h = 480, text = '')
 {
 	var area = {
 		//Variables
 		'width' : w,
 		'height' : h,
 		'code' : text,
+		'editorContainer' : null,
 		'editorRef' : null,
 		//Provide this function with an iframe and text to fill the editor with
-		'CreateEditor' : function(divName, text)
+		'CreateEditor' : function(divName, container, text)
 		{
-			var div = document.getElementById(divName)
-			div.width = area.width;
-			div.height = area.height;
-			div.innerHTML = text;
+			editorContainer = container;
+
+			editorContainer = document.getElementById(divName)
+			editorContainer.width = area.width;
+			editorContainer.height = area.height;
+			editorContainer.innerHTML = text;
+
+			console.log("Editor dims: " + area.width + ", " + area.height);
 
 			editorRef = ace.edit(divName);
 	    editorRef.setTheme("ace/theme/monokai");
 	    editorRef.session.setMode("ace/mode/c_cpp");
 			editorRef.getSession().setUseWorker(false);
-			editorRef.width = area.width.toString() + "px";
-			//document.getElementById(divName + '-section').width = area.width.toString() + "px";
-			document.getElementById(divName).height = area.height.toString() + "px";
-			//document.getElementById(divName + '-section').height = area.height.toString() + "px";
+			editorRef.getSession().setUseWrapMode(false);
+
+			editorContainer.style.width = area.width.toString() + "px";
+			editorContainer.style.height = area.height.toString() + "px";
+			editorRef.resize();
+		},
+
+		'Resize' : function(w, h)
+		{
+			area.width = w;
+			area.height = h;
+
+			editorContainer.style.width = area.width.toString() + "px";
+			editorContainer.style.height = area.height.toString() + "px";
+
 			editorRef.resize();
 		},
 

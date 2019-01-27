@@ -18,9 +18,19 @@
 		<script src="interpreter.js"></script>
 		<script src="parser.js"></script>
 	</head>
-	<body>
+	<body style="overflow: hidden">
+<style>
 
-		<div id="EntirePage">
+	.PagePane
+	{
+		transition: transform 0.5s;
+		position: absolute;
+
+		width: 100%;
+		height: 100%;
+	}
+</style>
+		<div id="EntireCodeView" class="PagePane" style="transform: translateX(100%)">
 			<div id="TopSection" style="text-align: center;">
 				<div id="TaskTitle">
 					Task Description
@@ -47,21 +57,25 @@
 				<div id="StackFramesZone"></div>
 			</div>
 
-
 		<!-- Our code area element -->
-		<div id="CodeArea"></div>
-</div>
+		<div id="Editor">
+			<div id="CodeArea"></div>
+		</div>
 		<button id="RunButton" type="button" style="position: absolute;bottom: 40px;left: calc(50% - 40px);">Run</button>
+</div>
+<div id="EntireInfoView" class="PagePane" style="transform: translateX(0%)">
+
+</div>
 
 		<!-- Our local script -->
 		<script>
 			//Creates the code editor out of an iframe
-			var codeArea = window.CreateCodeArea();
-			codeArea.CreateEditor("CodeArea",
+			var codeArea = window.CreateCodeArea(800, 800);
+			codeArea.CreateEditor("CodeArea", "Editor",
 `int add (int a, int b)
 {
 	int x = a + b; /* block comment */
-	return x; // your mom gay
+	return x; //Oh man, I love working with APIs
 }`);
 
 			document.getElementById('RunButton').onclick = function()
@@ -110,6 +124,29 @@
 
 	</script>
 
+
+	<script>
+	var EntireCodeView = document.getElementById("EntireCodeView");
+	var EntireInfoView = document.getElementById("EntireInfoView");
+	function ShowCodeView ()
+	{
+	EntireCodeView.style = "transform: translateX(0%)";
+	EntireInfoView.style = "transform: translateX(-100%)";
+	}
+	function ShowInfoView ()
+	{
+	EntireCodeView.style = "transform: translateX(100%)";
+	EntireInfoView.style = "transform: translateX(0%)";
+	}
+
+	var IsOnCodeView = false;
+	setInterval(function ()
+	{
+	if (IsOnCodeView) ShowInfoView();
+	else ShowCodeView();
+	IsOnCodeView = !IsOnCodeView;
+	},1000);
+	</script>
 
 
 </html>

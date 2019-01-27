@@ -13,15 +13,17 @@
 	</head>
 	<body>
 		<!-- Our code area element -->
-		<div id="CodeArea"></div>
+		<div id="Editor">
+			<div id="CodeArea"></div>
+		</div>
 
 		<!-- Our code area scripts -->
 		<script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 		<script src="code_area.js" type="text/javascript" charset="utf-8"></script>
 		<script>
 			//Creates the code editor out of an iframe
-			var codeArea = window.CreateCodeArea(600, 400);
-			codeArea.CreateEditor("CodeArea", "int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\";\n\treturn x;\n}\n")
+			var codeArea = window.CreateCodeArea(400, 200);
+			codeArea.CreateEditor("CodeArea", "Editor", "int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\";\n\treturn x;\n}\n")
 		</script>
 	</body>
 
@@ -32,7 +34,7 @@
 				if (e.which === 123)
 			{
 				console.log(codeArea.GetText());
-				codeArea.SetText("int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\"\n\treturn x;\n}\n");
+				//codeArea.SetText("int foo(int num)\n{\n\tint x = \"All this is syntax highlighted\"\n\treturn x;\n}\n");
 				window.OpenDevTools();
 			}
 			else if (e.which === 116)
