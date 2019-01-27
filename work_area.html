@@ -98,12 +98,12 @@
 `int add (int a, int b)
 {
 	int x = a + b; /* block comment */
-	return x; //Oh man, I love working with APIs
+	return x; // Line comment
 }`);
 
 			document.getElementById('RunButton').onclick = function()
 			{
-				//ClearVisualizer();
+				ClearVisualizer();
 				runCode(codeArea.GetText(), "add", [1, 2]);
 			}
 		</script>
