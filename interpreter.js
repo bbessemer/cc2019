@@ -1,3 +1,5 @@
+(function () {
+
 let addText = `
 int add(int a, int b)
 {
@@ -9,7 +11,7 @@ function error(msg) {
     console.log(msg);
 }
 
-function runCode(text, funcName, args) {
+this.runCode = (text, funcName, args) => {
     text = text.replace(/\/\/.*\n/g, "\n")
     text = text.replace(/\/\*.*\*\//g, "")
     var program = parser.parse(text);
@@ -18,12 +20,17 @@ function runCode(text, funcName, args) {
     }
     var stackFrame = { _animObject: NewStackFrame(funcName) };
     interpretFunc(program[funcName], args, stackFrame);
-    //runAnims();
+    runAnims();
 }
 
-function interpretFunc(func, args, stackFrame) {
+this.interpretFunc = (func, args, stackFrame) => {
     for (var i = 0; i < func.args.length; i++) {
         stackFrame[func.args[i].name.name] = args[i];
+        let funcArg = func.args[i];
+        let arg = args[i];
+        anims.push(() => {
+            animateArgDecl(funcArg.name, arg, stackFrame)
+        })
     }
 
     return interpretBlock(func.code, stackFrame);
@@ -48,12 +55,12 @@ function interpretBlock(code, stackFrame) {
 
     function interpretStatement(statement) {
         if (statement.type == "VarDecl") {
-            stackFrame[statement.name.name] = interpretExpr(statement.val);
+            stackFrame[statement.name.name] = interpretExpr(statement.val, stackFrame);
         } else if (statement.type == "Assignment") {
             if (typeof(stackFrame[statement.name.name]) == "undefined") {
                 error("Variable " + statement.name.name + " is not defined.");
             } else {
-                stackFrame[statement.lhs.name] = interpretExpr(statement.rhs)
+                stackFrame[statement.lhs.name] = interpretExpr(statement.rhs, stackFrame)
             }
         } else if (statement.type == "Expression") {
             interpretExpr(statement.val, stackFrame);
@@ -72,7 +79,7 @@ function interpretBlock(code, stackFrame) {
             }
         } else if (statement.type == "For") {
             for (interpretStatement(statement.init);
-                 interpretExpr(statement.cond).val;
+                 interpretExpr(statement.cond, stackFrame).val;
                  interpretStatement(statement.step))
             {
                 var rv = interpretBlock(statement.code);
@@ -95,7 +102,6 @@ function interpretExpr(expr, stackFrame) {
         anims.push(() => animateSelect(expr, stackFrame))
         return { type: "Integer", val: stackFrame[expr.name] }
     } else if (expr.type == "Add") {
-        console.log(lhs, rhs);
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
         if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number") {
@@ -128,12 +134,12 @@ function interpretExpr(expr, stackFrame) {
         }
         var resultVal;
         switch (expr.op) {
-            case "==" resultVal = (lhs.val == rhs.val); break;
-            case "!=" resultVal = (lhs.val != rhs.val); break;
-            case ">" resultVal = (lhs.val > rhs.val); break;
-            case "<" resultVal = (lhs.val < rhs.val); break;
-            case ">=" resultVal = (lhs.val >= rhs.val); break;
-            case "<=" resultVal = (lhs.val <= rhs.val); break;
+            case "==": resultVal = (lhs.val == rhs.val); break;
+            case "!=": resultVal = (lhs.val != rhs.val); break;
+            case ">": resultVal = (lhs.val > rhs.val); break;
+            case "<": resultVal = (lhs.val < rhs.val); break;
+            case ">=": resultVal = (lhs.val >= rhs.val); break;
+            case "<=": resultVal = (lhs.val <= rhs.val); break;
         }
         var result = { type: "Integer", val: (resultVal ? 1 : 0)}
         anims.push(() => animateOp(expr.op, result, stackFrame));
@@ -141,3 +147,5 @@ function interpretExpr(expr, stackFrame) {
         return interpretFunc(functions[expr.func.name.name], expr.args, stackFrame);
     }
 }
+
+})();
