@@ -115,7 +115,7 @@ function interpretExpr(expr, stackFrame) {
             return null;
         }
         var result;
-        if (expr.op == "*") result { type: "Integer", val: lhs.val * rhs.val }
+        if (expr.op == "*") result = { type: "Integer", val: lhs.val * rhs.val }
         else result = { type: "Integer", val: lhs.val / rhs.val }
         anims.push(() => animateOp(expr.op, result, stackFrame))
         return result;
