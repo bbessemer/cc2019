@@ -125,12 +125,6 @@
 	int x = a + b; /* block comment */
 	return x; //Oh man, I love working with APIs
 }`);
-
-			document.getElementById('RunButton').onclick = function()
-			{
-				//ClearVisualizer();
-				runCode(codeArea.GetText(), "add", [1, 2]);
-			}
 		</script>
 	</body>
 
@@ -153,5 +147,12 @@
 			if (e.which === 123) require("remote").window.OpenDevTools();
 			else if (e.which === 116) location.reload();
     });
+	function start ()
+	{
+		console.log("Button clicked")
+		ClearVisualizer();
+		runCode(codeArea.GetText(), "add", [1, 2]);
+	}
+	document.getElementById('RunButton').onclick = start;
 	</script>
 </html>
