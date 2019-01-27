@@ -142,24 +142,6 @@
 
 	<script>
 
-		var A = NewStackFrame("oof");
-
-		NewFrameItem(A).innerHTML = "5";
-		NewFrameItem(A).innerHTML = "25";
-		NewFrameItem(A).innerHTML = "125";
-
-		var x;
-		var test = [
-		    //() => runCode(codeArea.GetText(), "add", [1, 2])
-		]
-		var doer;
-		var pos = 0;
-		function donext ()
-		{
-			if (pos >= test.length) clearInterval(doer);
-			else test[pos++]();
-		};
-		doer = setInterval(donext,1000);
 	</script>
 
 	<!--                          Debug tools code                             -->
