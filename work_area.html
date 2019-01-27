@@ -45,7 +45,7 @@
 				</div></div>
 			</div>
 		</div>
-		<div id="EntireCodeView" class="PagePane" style="transform: translateX(0%)">
+		<div id="EntireCodeView" class="PagePane"  style="transform: translateX(0%);">
 			<div id="TopSection" style="text-align: center;"></div>
 			<div id="Visualizer">
 				<div id="OperatorsArea">
@@ -69,11 +69,24 @@
 			<div id="CodeArea"></div>
 		</div>
 </div>
-<div id="EntireInfoView" class="PagePane" style="transform: translateX(calc(-100% + 25px))">
-	
-	<img src="tabbutton.png" id="TabButton">
-		<img src="baseline-keyboard_arrow_right-24px.svg" id="TabButton_Arrow"></img>
-	</img>
+<div id="EntireInfoView" class="PagePane" style="transform: translateX(-100%)">
+	<style>
+		#TabButton_Arrow
+		{
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition: transform 0.5s;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+	<div id="TabButton">
+		<img src="tabbutton.png" width=100% height=100%></img>
+		<img id="TabButton_Arrow" src="baseline-keyboard_arrow_right-24px.svg"
+		style = "transform: rotate(0deg);"></img>
+
+	</div>
 	<div id="InfoBox">
 		<!-- Put info text stuff here -->
 		<div id="InfoTitle">
@@ -108,7 +121,7 @@
 		var EntireCodeView = document.getElementById("EntireCodeView");
 		var EntireInfoView = document.getElementById("EntireInfoView");
 		var correctAnswer = '';
-
+		var TabButton_Arrow = document.getElementById("TabButton_Arrow");
 		function ChangeWorkAreaText(title, problem, infotitle, info, desired)
 		{
 			document.getElementById('TaskTitle').innerHTML = title;
@@ -121,13 +134,15 @@
 		function ShowCodeView()
 		{
 			EntireCodeView.style = "transform: translateX(0%)";
-			EntireInfoView.style = "transform: translateX(calc(-100% + 25px))";
+			EntireInfoView.style = "transform: translateX(-100%)";
+			TabButton_Arrow.style = "transform: rotate(0deg);";
 		}
 
 		function ShowInfoView()
 		{
-			EntireCodeView.style = "transform: translateX(calc(25% - 40px))";
+			EntireCodeView.style = "transform: translateX(25%)";
 			EntireInfoView.style = "transform: translateX(0%)";
+			TabButton_Arrow.style = "transform: rotate(-180deg);";
 		}
 
 		var IsOnCodeView = true;
