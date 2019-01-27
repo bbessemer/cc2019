@@ -2,7 +2,7 @@
 	"lessons": [
 		{
 			"title": "Environment",
-			"script": [
+			"script": {
 				"overview": [
 					"This is the prompt. It helps to keep in mind what you are trying to learn.",
 					"The code frame is where you can read and write code. It also has effects to emphasize parts of the code.",
@@ -10,11 +10,11 @@
 					"When going through a lesson or executing code, take care to see how it is being visualized.",
 					"These buttons allow you execute and step through your code. The visualizer frame will give you graphical feedback on what each line is doing."
 				]
-			]
+			}
 		},
 		{
 			"title": "Syntax",
-			"script": [
+			"script": {
 				"code": [
 					"int x",
 					" = 4",
@@ -46,11 +46,11 @@
 				"conclusion": [
 					"By combinding the declaration and the definiton, we are able to construct a simple declarative statement."
 				]
-			]
+			}
 		},
 		{
 			"title": "Data Types",
-			"scripts": [
+			"scripts": {
 				"code": [
 					"int x = 4;",
 					"float x = 4.0;",
@@ -72,8 +72,8 @@
 				"bool": [
 					"The `bool`data type only has two values; true or false. This makes them useful for writing logic in our program."
 				]
-			],
-			"practice": [
+			},
+			"practice": {
 				"code": [
 					"floatvelocity;",
 					"char",
@@ -86,7 +86,7 @@
 					"Declare an int called `wheels` with the number of wheels a car has",
 					"Use a boolean variable called `flying' to store whether or not you are flying"
 				]
-			]
+			}
 		}
 	]
 }
