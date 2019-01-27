@@ -58,9 +58,27 @@ function interpretFunc(func, args, stackFrame) {
         animateVarDecl(func.args[i].name.name, args[i], stackFrame);
     }
 
-    for (var i = 0; i < func.code.length; i++) {
-        let statement = func.code[i];
+    return interpretBlock(func.code, stackFrame);    
+}
 
+function interpretBlock(code, stackFrame) {
+
+    function interpretIf(code) {
+        if (interpretExpr(statement.cond, stackFrame).val) {
+            var rv = interpretBlock(statement.ifCode, stackFrame)
+            if (rv != null) return rv;
+        } else {
+            if (Array.isArray(statement.elseCode)) {
+                var rv = interpretBlock(statement.ifCode, stackFrame)
+                if (rv != null) return rv;
+            } else {
+                var rv = interpretIf(statement.elseCode);
+                if (rv != null) return rv;
+            }
+        }
+    }
+
+    function interpretStatement(statement) {
         if (statement.type == "VarDecl") {
             stackFrame[statement.name.name] = animateVarDecl(statement.name.name,
                 interpretExpr(statement.val, stackFrame), stackFrame)
@@ -71,7 +89,34 @@ function interpretFunc(func, args, stackFrame) {
                 stackFrame[statement.name] = animateAssign(statement.name.name,
                     interpretExpr(statement.val, stackFrame), stackFrame);
             }
+        } else if (statement.type == "Expression") {
+            interpretExpr(statement.val, stackFrame);
+        } else if (statement.type == "IncDec") {
+            if (statement.op == "++") { animateInc(statement.name.name, 1, stackFrame); }
+            else if (statement.op == "--") { animateInc(statement.name.name, -1, stackFrame); }
+        } else if (statement.type == "Return") {
+            return animateReturn(interpretExpr(statement.val, stackFrame));
+        } else if (statement.type == "IfElse") {
+            var rv = interpretIf(statement);
+            if (rv != null) return rv;
+        } else if (statement.type == "While") {
+            while (interpretExpr(statement.cond, stackFrame).val) {
+                var rv = interpretBlock(statement.code);
+                if (rv != null) return rv;
+            }
+        } else if (statement.type == "For") {
+            for (interpretStatement(statement.init);
+                 interpretExpr(statement.cond).val;
+                 interpretStatement(statement.step))
+            {
+                var rv = interpretBlock(statement.code);
+                if (rv != null) return rv;
+            }
         }
+    }
+
+    for (var i = 0; i < code.length; i++) {
+        interpretStatement(code[i]); 
     }
 }
 
