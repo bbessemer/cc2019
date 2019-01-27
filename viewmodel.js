@@ -1,5 +1,7 @@
 (function () {
 
+this.anims = [];
+
 var currentOperands = [];
 var currentResult;
 var frameItems = {}
@@ -42,6 +44,25 @@ this.animateOp = (op, result, stackFrame) => {
         currentOperands[0].valuetext_element.removeNode();
         currentOperands[1].valuetext_element.removeNode();
     }, 500)
+}
+
+this.animateArgDecl = (symbol, value, stackFrame) => {
+    var frameItem = NewFrameItem(stackFrame._animObject, symbol.name);
+    frameItem.valuetext_element.innerHTML = value.val;
+    frameItems[symbol.name] = frameItem;
+}
+
+var animator;
+
+this.runAnims = () => {
+    var len = anims.length;
+    var i = 0;
+    var interval = setInterval(() => {
+        if (i >= len) clearInterval(interval);
+        anims[i++]();
+    }, 500)
+    //animator = setInterval(function () {
+    //}, 500);
 }
 
 })();
