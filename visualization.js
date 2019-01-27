@@ -200,5 +200,6 @@ function CloneStackItem (stack_item /*the dictionary returned by NewFrameItem, n
 	cloned.classList.add("ClonedStackItem");
 	cloned.style.top = ypos + "px";
 	VisualizerMainElement.appendChild(cloned);
+	ForceRecalculate(cloned);
 	return cloned;
 }

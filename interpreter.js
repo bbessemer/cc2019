@@ -5,6 +5,10 @@ int add(int a, int b)
     return x;
 }`
 
+function error(msg) {
+    console.log(msg);
+}
+
 function runCode(text, funcName, args) {
     text = text.replace(/\/\/.*\n/g, "\n")
     text = text.replace(/\/\*.*\*\//g, "")
@@ -14,6 +18,7 @@ function runCode(text, funcName, args) {
     }
     var stackFrame = { _animObject: NewStackFrame(funcName) };
     interpretFunc(program[funcName], args, stackFrame);
+    //runAnims();
 }
 
 function interpretFunc(func, args, stackFrame) {
@@ -44,13 +49,15 @@ function interpretBlock(code, stackFrame) {
 
     function interpretStatement(statement) {
         if (statement.type == "VarDecl") {
-            stackFrame[statement.name.name] = animateVarDecl(statement.name.name,
+            animateVarDecl(statement.name.name,
                 interpretExpr(statement.val, stackFrame), stackFrame)
+            stackFrame[statement.name.name] = animateAssign(stackFrame[statement.name.name],
+                interpretExpr(statement.val, stackFrame), stackFrame);
         } else if (statement.type == "Assignment") {
             if (typeof(stackFrame[statement.name.name]) == "undefined") {
                 error("Variable " + statement.name.name + " is not defined.");
             } else {
-                stackFrame[statement.name] = animateAssign(statement.name.name,
+                stackFrame[statement.name.name] = animateAssign(statement.name.name,
                     interpretExpr(statement.val, stackFrame), stackFrame);
             }
         } else if (statement.type == "Expression") {
@@ -85,12 +92,13 @@ function interpretBlock(code, stackFrame) {
 }
 
 function interpretExpr(expr, stackFrame) {
-    console.log(expr)
-    if (expr.type == "Integer") {
+    if (expr == null) return null;
+    else if (expr.type == "Integer") {
         return animateSelect(expr, stackFrame);
     } else if (expr.type == "Symbol") {
         return animateSelect(expr, stackFrame);
     } else if (expr.type == "Add") {
+        console.log(lhs, rhs);
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
         if (typeof(lhs.val) !== "number" || typeof(rhs.val) !== "number") {
