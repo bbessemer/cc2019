@@ -81,6 +81,7 @@ function NewStackFrame (function_name) // Function name.
 		current_height:INITIAL_STACKFRAME_HEIGHT/*px*/,
 		current_xpos:STACKFRAME_ITEM_WIDTH_PROPORTION,
 		current_ypos:INITIAL_STACKFRAME_ITEMCREATE_YPOS/*px*/,
+		items_until_expansion: STACKFRAME_ITEMS_PER_ROW,
 	};
 
 	return out;//stackframe;
@@ -113,13 +114,16 @@ function GetNextColor ()
 }
 function NewFrameItem (stackframe, variable_name)
 {
-	if (stackframe.items % STACKFRAME_ITEMS_PER_ROW == 0 && stackframe.items != 0)
+	if (stackframe.items_until_expansion <= 0)
 	{
 		stackframe.current_height += STACKFRAME_HEIGHT_GROWTH;
 		stackframe.current_ypos += STACKFRAME_HEIGHT_GROWTH;
 		stackframe.current_xpos = STACKFRAME_ITEM_WIDTH_PROPORTION;
-		stackframe.style = "height: " + stackframe.current_height + "px;";
+		console.log("height is now " + stackframe.current_height);
+		stackframe.element.style = "height: " + stackframe.current_height + "px;";
+		stackframe.items_until_expansion = STACKFRAME_ITEMS_PER_ROW;
 	}
+	stackframe.items_until_expansion--;
 	var stackitem = document.createElement("div");
 	stackframe.element.appendChild(stackitem);
 	stackitem.className = "StackItem";
