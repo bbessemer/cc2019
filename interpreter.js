@@ -34,6 +34,15 @@ int add(int a, int b)
     return x;
 }`
 
+function runCode(text, funcName, args) {
+    var program = parser.parse(text);
+    for (var i = 0; i < args.length; i++) {
+        args[i] = { type: "Integer", val: args[i] };
+    }
+    var stackFrame = { _animObject: NewStackFrame(funcName) };
+    interpretFunc(program[funcName], args, stackFrame);
+}
+
 function addTest() {
     var add = parser.parse(addText).add;
     console.log(add);

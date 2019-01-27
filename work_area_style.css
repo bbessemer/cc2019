@@ -1,4 +1,69 @@
+body
+{
+	background-color: #222;
+}
+
 #TaskDescription
 {
 	font-weight: bolder;
+}
+
+#OperatorsArea
+{
+	height: 150px;
+	width:100%;
+	position: relative;
+}
+.Operator
+{
+	width: 15%;
+	height: 70%;
+	position: absolute;
+	background-color: #999;
+	top: 15%;
+	text-align: center;
+}
+.OperatorSymbol
+{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #555;
+	font-size: 48pt;
+	font-family: monospace;
+}
+#PlusOp
+{
+	left: 5%;
+}
+#MinusOp
+{
+	left: 30%;
+}
+#MultOp
+{
+	left: 55%;
+}
+#DivOp
+{
+	left: 80%;
+}
+#Visualizer
+{
+	overflow: hidden;
+	//width: 60%;
+	//height: 80%;
+	height: 900px;
+	border: 1px solid black;
+    box-sizing: border-box;
+	position: absolute;
+	left: 810px;
+	width: calc(100% - 815px);
+}
+
+#CodeArea
+{
+	position: absolute;
+	width: 800px;
+	height: 900px;
 }
