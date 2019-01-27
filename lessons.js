@@ -99,17 +99,23 @@ var lessons =  [
 	},
 	{
 		"title": "Practice",
-		"answers": [
-			"floatvelocity;",
-			"char",
-			"intwheels=4;",
-			"boolflying=false;"
-		],
-		"problems": [
-			"Declare a float called `velocity'.",
-			"What data type would be most useful for a teacher to store letter grades",
-			"Declare an int called `wheels` with the number of wheels a car has",
-			"Use a boolean variable called `flying' to store whether or not you are flying"
+		"slides": [
+			{
+				"answer": "floatvelocity;",
+				"problem": "Declare a float called `velocity'."
+			},
+			{
+				"answer": "char",
+				"problem": "What data type would be most useful for a teacher to store letter grades"
+			},
+			{
+				"answer": "intwheels=4;",
+				"problem": "Declare an int called `wheels` with the number of wheels a car has"
+			},
+			{
+				"answer": "boolflying=false;",
+				"problem": "Use a boolean variable called `flying' to store whether or not you are flying"
+			}
 		]
 	}
 ]
