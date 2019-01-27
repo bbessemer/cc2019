@@ -89,8 +89,10 @@ function interpretBlock(code, stackFrame) {
 function interpretExpr(expr, stackFrame) {
     if (expr == null) return null;
     else if (expr.type == "Integer") {
+        anims.push(() => animateSelect(expr, stackFrame))
         return expr;
     } else if (expr.type == "Symbol") {
+        anims.push(() => animateSelect(expr, stackFrame))
         return { type: "Integer", val: stackFrame[expr.name] }
     } else if (expr.type == "Add") {
         console.log(lhs, rhs);
@@ -100,9 +102,11 @@ function interpretExpr(expr, stackFrame) {
             error("Cannot add a non-number.");
             return null;
         }
-
-        if (expr.op == "+") return { type: "Integer", val: lhs + rhs }
-        else return { type: "Integer", val: lhs - rhs }
+        var result;
+        if (expr.op == "+") result = { type: "Integer", val: lhs.val + rhs.val }
+        else result = { type: "Integer", val: lhs.val - rhs.val }
+        anims.push(() => animateOp(expr.op, result, stackFrame))
+        return result
     } else if (expr.type == "Mult") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
@@ -110,9 +114,11 @@ function interpretExpr(expr, stackFrame) {
             error("Cannot multiply a non-number.");
             return null;
         }
-
-        if (expr.op == "*") return { type: "Integer", val: lhs * rhs }
-        else return { type: "Integer", val: lhs / rhs }
+        var result;
+        if (expr.op == "*") result = { type: "Integer", val: lhs.val * rhs.val }
+        else result = { type: "Integer", val: lhs.val / rhs.val }
+        anims.push(() => animateOp(expr.op, result, stackFrame))
+        return result;
     } else if (expr.type == "Compare") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
@@ -120,8 +126,17 @@ function interpretExpr(expr, stackFrame) {
             error("Cannot compare a non-number.");
             return null;
         }
-
-        switch (expr.op) {}
+        var resultVal;
+        switch (expr.op) {
+            case "==" resultVal = (lhs.val == rhs.val); break;
+            case "!=" resultVal = (lhs.val != rhs.val); break;
+            case ">" resultVal = (lhs.val > rhs.val); break;
+            case "<" resultVal = (lhs.val < rhs.val); break;
+            case ">=" resultVal = (lhs.val >= rhs.val); break;
+            case "<=" resultVal = (lhs.val <= rhs.val); break;
+        }
+        var result = { type: "Integer", val: (resultVal ? 1 : 0)}
+        anims.push(() => animateOp(expr.op, result, stackFrame));
     } else if (expr.type == "FnCall") {
         return interpretFunc(functions[expr.func.name.name], expr.args, stackFrame);
     }

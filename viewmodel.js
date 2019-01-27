@@ -1,43 +1,47 @@
-var anims = [];
+(function () {
 
-function animateVarDecl(name, value, stackFrame) {
-    console.log(name, value, stackFrame)
-    var frameItem = NewFrameItem(stackFrame._animObject, name);
-    stackFrame[name] = value;
-    stackFrame[name].frameItem = frameItem;
+var currentOperands = [];
+var currentResult;
+var frameItems = {}
+
+this.animateSelect = (elem, stackFrame) => {
+    var selected;
+    if (elem.type == "Symbol") {
+        selected = CloneStackItem(frameItems[elem.name]);
+    } else if (elem.type == "Integer") {
+        selected = NewFrameItem(stackFrame._animObject, "");
+        selected.valuetext_element.innerHTML = elem.val;
+    }
+    var {x, y} = GetStackItemXY(selected.valuetext_element)
+    ClonedStackItemGoesTo(selected, x, y - 100);
+    currentOperands.push(selected);
+    currentResult = selected;
 }
 
-function animateAssign(lhs, rhs, stackFrame) {
-    if (rhs.type == "Symbol") {
-        var newThing = CloneStackItem(rhs.frameItem);
-        var {x, y} = GetStackItemXY(lhs.frameItem.valuetext_element);
-        ClonedStackItemGoesTo(newThing, x, y);
-    } else {
-        lhs.frameItem.valuetext_element.innerHTML = rhs.val;
+function getRectCenter (elemId) {
+    var rect = document.getElementById(elemId).getBoundingClientRect();
+    return {
+        x: rect.left + rect.width * 0.5,
+        y: rect.top + rect.height * 0.5
     }
 }
 
-function animateSelect(expr, stackFrame) {
-    return expr;
+this.animateOp = (op, result, stackFrame) => {
+    var signCoords;
+    switch (op) {
+        case "+": signCoords = getRectCenter("PlusOp"); break;
+        case "-": signCoords = getRectCenter("MinusOp"); break;
+        case "*": signCoords = getRectCenter("MultOp"); break;
+        case "/": signCoords = getRectCenter("DivOp"); break;
+    }
+    ClonedStackItemGoesTo(currentOperands[0], signCoords.x, signCoords.y);
+    ClonedStackItemGoesTo(currentOperands[1], signCoords.x, signCoords.y);
+    setTimeout(() => {
+        currentResult = CloneStackItem(currentOperands[1]);
+        currentResult.valuetext_element.innerHTML = result.val;
+        currentOperands[0].valuetext_element.removeNode();
+        currentOperands[1].valuetext_element.removeNode();
+    }, 500)
 }
 
-function animateAdd(lhs, rhs, stackFrame) {
-
-}
-
-function animateSubtract(lhs, rhs, stackFrame) {}
-
-function animateMultiply(lhs, rhs, stackFrame) {}
-
-function animateDivide(lhs, rhs, stackFrame) {}
-
-function animateCompare(op, lhs, rhs, stackFrame) {}
-
-function animateFnCall(fnName, args, stackFrame) {}
-
-function animateReturn(expr, stackFrame) {}
-
-function runAnims() {
-    var i = 0;
-    setInterval(() => anims[i++](), 500)
-}
+})();
