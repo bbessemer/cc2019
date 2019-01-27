@@ -21,22 +21,15 @@
 	<body style="overflow: hidden">
 <style>
 
-	.PagePane
-	{
-		transition: transform 0.5s;
-		position: absolute;
 
-		width: 100%;
-		height: 100%;
-	}
 </style>
-		<div id="EntireCodeView" class="PagePane" style="transform: translateX(100%)">
+		<div id="EntireCodeView" class="PagePane" style="transform: translateX(0%)">
 			<div id="TopSection" style="text-align: center;">
 				<div id="TaskTitle">
-					Task Description
+					Task Title
 				</div>
 				<div id="TaskDescription">
-					Yo man here some kinda visualizer or somethin
+					Problem task goes here
 				</div>
 			</div>
 			<div id="Visualizer">
@@ -61,10 +54,20 @@
 		<div id="Editor">
 			<div id="CodeArea"></div>
 		</div>
-		<button id="RunButton" type="button" style="position: absolute;bottom: 40px;left: calc(50% - 40px);">Run</button>
+		<button id="RunButton" type="button" style="position: absolute; bottom: 40px;left: calc(50% - 80px);">Run code</button>
+		<button id="NextButton" type="button" style="position: absolute; bottom: 40px;left: calc(50% + 20px);">Next section</button>
 </div>
-<div id="EntireInfoView" class="PagePane" style="transform: translateX(0%)">
-
+<div id="EntireInfoView" class="PagePane" style="transform: translateX(calc(-100% + 25px))">
+	<img src="tabbutton.png" id="TabButton"></img>
+	<div id="InfoBox">
+		<!-- Put info text stuff here -->
+		<div id="InfoTitle">
+			Info Title
+		</div>
+		<div id="InfoText">
+			Here's some brief explanation of what we just taught
+		</div>
+	</div>
 </div>
 
 		<!-- Our local script -->
@@ -86,16 +89,36 @@
 		</script>
 	</body>
 
-	<!--                          Debug tools code                             -->
 	<script>
-    document.addEventListener("keydown", function (e)
+		var EntireCodeView = document.getElementById("EntireCodeView");
+		var EntireInfoView = document.getElementById("EntireInfoView");
+
+		function ShowCodeView()
 		{
-			if (e.which === 123) require("remote").window.OpenDevTools();
-			else if (e.which === 116) location.reload();
-    });
+			EntireCodeView.style = "transform: translateX(0%)";
+			EntireInfoView.style = "transform: translateX(calc(-100% + 25px))";
+		}
+
+		function ShowInfoView()
+		{
+			EntireCodeView.style = "transform: translateX(25%)";
+			EntireInfoView.style = "transform: translateX(0%)";
+		}
+
+		var IsOnCodeView = true;
+
+		document.getElementById('TabButton').onclick = function()
+		{
+			if (IsOnCodeView) ShowInfoView();
+			else ShowCodeView();
+			IsOnCodeView = !IsOnCodeView;
+		}
+
+		//document.getElementById('TabButton').onclick = ToggleView();
 	</script>
 
 	<script src="visualization.js"></script>
+
 
 <!-- Test script to make stuff animate in the Visualizer area -->
 
@@ -107,46 +130,28 @@
 		NewFrameItem(A).innerHTML = "25";
 		NewFrameItem(A).innerHTML = "125";
 
-	var x;
-	var test = [
-	    //() => runCode(codeArea.GetText(), "add", [1, 2])
-	]
-	var doer;
-	var pos = 0;
-	function donext ()
-	{
-		if (pos >= test.length) clearInterval(doer);
-		else test[pos++]();
-	};
-	doer = setInterval(donext,1000);
-
-
-
+		var x;
+		var test = [
+		    //() => runCode(codeArea.GetText(), "add", [1, 2])
+		]
+		var doer;
+		var pos = 0;
+		function donext ()
+		{
+			if (pos >= test.length) clearInterval(doer);
+			else test[pos++]();
+		};
+		doer = setInterval(donext,1000);
 	</script>
 
-
+	<!--                          Debug tools code                             -->
 	<script>
-	var EntireCodeView = document.getElementById("EntireCodeView");
-	var EntireInfoView = document.getElementById("EntireInfoView");
-	function ShowCodeView ()
-	{
-	EntireCodeView.style = "transform: translateX(0%)";
-	EntireInfoView.style = "transform: translateX(-100%)";
-	}
-	function ShowInfoView ()
-	{
-	EntireCodeView.style = "transform: translateX(100%)";
-	EntireInfoView.style = "transform: translateX(0%)";
-	}
+    document.addEventListener("keydown", function (e)
+		{
+			//if (e.which === 122) ToggleView();
 
-	var IsOnCodeView = false;
-	setInterval(function ()
-	{
-	if (IsOnCodeView) ShowInfoView();
-	else ShowCodeView();
-	IsOnCodeView = !IsOnCodeView;
-	},1000);
+			if (e.which === 123) require("remote").window.OpenDevTools();
+			else if (e.which === 116) location.reload();
+    });
 	</script>
-
-
 </html>
