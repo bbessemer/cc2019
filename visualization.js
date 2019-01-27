@@ -234,7 +234,7 @@ function GetStackItemXY /* returns dictionary {x,y} */ (element)
 }
 function CloneStackItem (stack_item /*the dictionary returned by NewFrameItem, not an element*/)
 {
-	var cloned = stack_item.container_element.cloneNode();
+	var cloned = stack_item.container_element.cloneNode(true);
 	var ypos = GetStackItemXY(stack_item.stackframe.element).y;
 	console.log("pos diff: " + ypos);
 	cloned.classList.add("ClonedStackItem");
