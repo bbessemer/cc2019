@@ -22,6 +22,7 @@ function createWindow()
 	//Makes sure to only show the window once the renderer has rendered the first page
 	window.once('ready-to-show', () => {
 		window.show();
+		window.maximize();
 		//devtools.webContents.openDevTools();
 	})
 
