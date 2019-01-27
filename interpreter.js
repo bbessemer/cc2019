@@ -24,7 +24,6 @@ function runCode(text, funcName, args) {
 function interpretFunc(func, args, stackFrame) {
     for (var i = 0; i < func.args.length; i++) {
         stackFrame[func.args[i].name.name] = args[i];
-        animateVarDecl(func.args[i].name.name, args[i], stackFrame);
     }
 
     return interpretBlock(func.code, stackFrame);
@@ -49,24 +48,20 @@ function interpretBlock(code, stackFrame) {
 
     function interpretStatement(statement) {
         if (statement.type == "VarDecl") {
-            animateVarDecl(statement.name.name,
-                interpretExpr(statement.val, stackFrame), stackFrame)
-            stackFrame[statement.name.name] = animateAssign(stackFrame[statement.name.name],
-                interpretExpr(statement.val, stackFrame), stackFrame);
+            stackFrame[statement.name.name] = interpretExpr(statement.val);
         } else if (statement.type == "Assignment") {
             if (typeof(stackFrame[statement.name.name]) == "undefined") {
                 error("Variable " + statement.name.name + " is not defined.");
             } else {
-                stackFrame[statement.name.name] = animateAssign(statement.name.name,
-                    interpretExpr(statement.val, stackFrame), stackFrame);
+                stackFrame[statement.lhs.name] = interpretExpr(statement.rhs)
             }
         } else if (statement.type == "Expression") {
             interpretExpr(statement.val, stackFrame);
         } else if (statement.type == "IncDec") {
-            if (statement.op == "++") { animateInc(statement.name.name, 1, stackFrame); }
-            else if (statement.op == "--") { animateInc(statement.name.name, -1, stackFrame); }
+            if (statement.op == "++") { stackFrame[statement.name.name]++; }
+            else if (statement.op == "--") { stackFrame[statement.name.name]--; }
         } else if (statement.type == "Return") {
-            return animateReturn(interpretExpr(statement.val, stackFrame));
+            return interpretExpr(statement.val, stackFrame);
         } else if (statement.type == "IfElse") {
             var rv = interpretIf(statement);
             if (rv != null) return rv;
@@ -94,9 +89,9 @@ function interpretBlock(code, stackFrame) {
 function interpretExpr(expr, stackFrame) {
     if (expr == null) return null;
     else if (expr.type == "Integer") {
-        return animateSelect(expr, stackFrame);
+        return expr;
     } else if (expr.type == "Symbol") {
-        return animateSelect(expr, stackFrame);
+        return { type: "Integer", val: stackFrame[expr.name] }
     } else if (expr.type == "Add") {
         console.log(lhs, rhs);
         var lhs = interpretExpr(expr.lhs, stackFrame);
@@ -106,8 +101,8 @@ function interpretExpr(expr, stackFrame) {
             return null;
         }
 
-        if (expr.op == "+") return animateAdd(lhs, rhs, stackFrame);
-        else return animateSubtract(lhs, rhs, stackFrame);
+        if (expr.op == "+") return { type: "Integer", val: lhs + rhs }
+        else return { type: "Integer", val: lhs - rhs }
     } else if (expr.type == "Mult") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
@@ -116,8 +111,8 @@ function interpretExpr(expr, stackFrame) {
             return null;
         }
 
-        if (expr.op == "*") return animateMultiply(lhs, rhs, stackFrame);
-        else return animateDivide(lhs, rhs, stackFrame);
+        if (expr.op == "*") return { type: "Integer", val: lhs * rhs }
+        else return { type: "Integer", val: lhs / rhs }
     } else if (expr.type == "Compare") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
         var rhs = interpretExpr(expr.rhs, stackFrame);
@@ -126,9 +121,8 @@ function interpretExpr(expr, stackFrame) {
             return null;
         }
 
-        return animateCompare(expr.op, lhs, rhs, stackFrame);
+        switch (expr.op) {}
     } else if (expr.type == "FnCall") {
-        var stackFrame = { _animObject: NewStackFrame(expr.func) }
         return interpretFunc(functions[expr.func.name.name], expr.args, stackFrame);
     }
 }
