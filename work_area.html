@@ -19,6 +19,10 @@
 		<script src="parser.js"></script>
 	</head>
 	<body style="overflow: hidden">
+<style>
+
+
+</style>
 		<div id="TextButtonsView" class="PagePane">
 			<div id="TopSection" style="text-align: center;">
 				<div id="TaskTitle">
@@ -27,22 +31,6 @@
 				<div id="TaskDescription">
 					Problem task goes here
 				</div>
-			</div>
-			<div class="ExecutionButtonContainer" style="left: calc(50% - 70px);">
-				<button id="RunButton" type="button" class="ExecutionButton">
-					<img src="baseline-play_circle_outline-24px.svg" class="ExecutionButtonImage"></img>
-				</button>
-				<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
-					Run Code
-				</div></div>
-			</div>
-			<div class="ExecutionButtonContainer" style="left: calc(50% + 20px);">
-				<button id="NextButton" type="button" class="ExecutionButton">
-					<img src="baseline-arrow_forward-24px.svg" class="ExecutionButtonImage"></img>
-				</button>
-				<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
-					Next Section
-				</div></div>
 			</div>
 		</div>
 		<div id="EntireCodeView" class="PagePane" style="transform: translateX(0%)">
@@ -64,9 +52,26 @@
 				</div>
 				<div id="StackFramesZone"></div>
 			</div>
+
 		<!-- Our code area element -->
 		<div id="Editor">
 			<div id="CodeArea"></div>
+		</div>
+		<div class="ExecutionButtonContainer" style="left: calc(50% - 70px);">
+			<button id="RunButton" type="button" class="ExecutionButton">
+				<img src="baseline-play_circle_outline-24px.svg" class="ExecutionButtonImage"></img>
+			</button>
+			<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
+				Run Code
+			</div></div>
+		</div>
+		<div class="ExecutionButtonContainer" style="left: calc(50% + 20px);">
+			<button id="NextButton" type="button" class="ExecutionButton">
+				<img src="baseline-arrow_forward-24px.svg" class="ExecutionButtonImage"></img>
+			</button>
+			<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
+				Next Section
+			</div></div>
 		</div>
 </div>
 <div id="EntireInfoView" class="PagePane" style="transform: translateX(calc(-100% + 25px))">
