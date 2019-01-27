@@ -54,21 +54,21 @@ function addTest() {
 
 function interpretFunc(func, args, stackFrame) {
     for (var i = 0; i < func.args.length; i++) {
-        stackFrame[func.args[i].name] = args[i];
-        animateVarDecl(func.args[i].name, args[i], stackFrame);
+        stackFrame[func.args[i].name.name] = args[i];
+        animateVarDecl(func.args[i].name.name, args[i], stackFrame);
     }
 
     for (var i = 0; i < func.code.length; i++) {
         let statement = func.code[i];
 
         if (statement.type == "VarDecl") {
-            stackFrame[statement.name] = animateVarDecl(statement.name,
+            stackFrame[statement.name.name] = animateVarDecl(statement.name.name,
                 interpretExpr(statement.val, stackFrame), stackFrame)
         } else if (statement.type == "Assignment") {
-            if (typeof(stackFrame[statement.name]) == "undefined") {
-                error("Variable " + statement.name + " is not defined.");
+            if (typeof(stackFrame[statement.name.name]) == "undefined") {
+                error("Variable " + statement.name.name + " is not defined.");
             } else {
-                stackFrame[statement.name] = animateAssign(statement.name,
+                stackFrame[statement.name] = animateAssign(statement.name.name,
                     interpretExpr(statement.val, stackFrame), stackFrame);
             }
         }
@@ -76,6 +76,7 @@ function interpretFunc(func, args, stackFrame) {
 }
 
 function interpretExpr(expr, stackFrame) {
+    console.log(expr)
     if (expr.type == "Integer") {
         return animateSelect(expr);
     } else if (expr.type == "Symbol") {
