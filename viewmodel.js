@@ -15,16 +15,18 @@ this.animateSelect = (elem, stackFrame) => {
     }
     console.log(selected)
     var {x, y} = GetStackItemXY(selected)
-    ClonedStackItemGoesTo(selected, x, y - 120);
+    ClonedStackItemGoesTo(selected, x, y - 20);
     currentOperands.push(selected);
     currentResult = selected;
 }
 
 function getRectCenter (elemId) {
     var rect = document.getElementById(elemId).getBoundingClientRect();
+    rect.x -= VisualizerMainElement.getBoundingClientRect().left;
+    rect.y -= VisualizerMainElement.getBoundingClientRect().top;
     return {
-        x: rect.left + rect.width * 0.5,
-        y: rect.top + rect.height * 0.5
+        x: rect.left + rect.width * 0.25,
+        y: rect.top + rect.height * 0.25
     }
 }
 
@@ -40,11 +42,30 @@ this.animateOp = (op, result, stackFrame) => {
     ClonedStackItemGoesTo(currentOperands[0], signCoords.x, signCoords.y);
     ClonedStackItemGoesTo(currentOperands[1], signCoords.x, signCoords.y);
     setTimeout(() => {
-        currentResult = CloneStackItem(currentOperands[1]);
-        currentResult.valuetext_element.innerHTML = result.val;
-        currentOperands[0].valuetext_element.removeNode();
-        currentOperands[1].valuetext_element.removeNode();
-    }, 500)
+        currentResult = MakeDummyFrameItem("", result.val, signCoords.x, signCoords.y)
+        console.log(currentResult)
+        currentOperands[0].remove();
+        currentOperands[1].remove();
+    }, 400)
+}
+
+this.animateVarDecl = (symbol, value, stackFrame) => {
+    var frameItem = NewFrameItem(stackFrame._animObject, symbol.name);
+    frameItem.valuetext_element.innerHTML = "";
+    frameItems[symbol.name] = frameItem;
+    if (value != null) {
+        animateAssign(symbol);
+    }
+}
+
+this.animateAssign = (symbol) => {
+    var dest = frameItems[symbol.name].container_element;
+    console.log(frameItems)
+    console.log(dest)
+    console.log(symbol)
+    var {x, y} = GetStackItemXY(dest);
+    console.log(currentResult)
+    ClonedStackItemGoesTo(currentResult, x, y);
 }
 
 this.animateArgDecl = (symbol, value, stackFrame) => {
