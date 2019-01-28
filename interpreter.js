@@ -59,8 +59,8 @@ function interpretBlock(code, stackFrame) {
             stackFrame[statement.name.name] = val;
             anims.push(() => animateVarDecl(statement.name, val, stackFrame));
         } else if (statement.type == "Assignment") {
-            if (typeof(stackFrame[statement.name.name]) == "undefined") {
-                error("Variable " + statement.name.name + " is not defined.");
+            if (typeof(stackFrame[statement.lhs.name]) == "undefined") {
+                error("Variable " + statement.lhs.name + " is not defined.");
             } else {
                 stackFrame[statement.lhs.name] = interpretExpr(statement.rhs, stackFrame)
             }

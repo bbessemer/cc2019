@@ -171,8 +171,9 @@ function NewFrameItem (stackframe, variable_name)
 }
 var VisualizerMainElement = document.getElementById("Visualizer");
 
-/* returns the dom element, not a dictonary. is a child of the visualizer main element, not a stack frame. */
-function MakeDummyFrameItem (variable_name, value_text/*string*/, x_position,y_position)
+/*  returns the dom element, not a dictonary. is a child of the visualizer main element, not a stack frame.
+ 	should provide color of the existing StackFrame item this is going to go onto and replace */
+function MakeDummyFrameItem (variable_name, value_text/*string*/, x_position,y_position, color /*string like "#FFFFFF" */)
 {
 	var stackitem = document.createElement("div");
 	VisualizerMainElement.appendChild(stackitem);
@@ -194,7 +195,7 @@ function MakeDummyFrameItem (variable_name, value_text/*string*/, x_position,y_p
 	ItemValueText.className = "StackItemValue";
 	ItemValue.appendChild(ItemValueText);
 
-	ItemValue.style["background-color"] = "#" + GetNextColor();
+	ItemValue.style["background-color"] = color;
 
 	ItemNameText.innerHTML = variable_name;
 	ItemValueText.innerHTML = "0";
