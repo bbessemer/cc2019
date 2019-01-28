@@ -84,8 +84,19 @@ this.runAnims = () => {
         if (i >= len) clearInterval(interval);
         anims[i++]();
     }, 500)
-    //animator = setInterval(function () {
-    //}, 500);
+
+	// a way to do this without counting
+    /*var interval = setInterval(() => {
+		try
+		{
+			var anim = anims.shift();
+			anim();
+		}
+		catch (whocares)
+		{
+			clearInterval(interval);
+		}
+    }, 500)*/
 }
 
 })();
