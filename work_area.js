@@ -11,7 +11,7 @@ function ChangeWorkAreaText(title, problem, infotitle, info, desired)
 	correctAnswer = desired;
 }
 
-ChangeWorkAreaText(lesson.title, lesson.slides[1].problem, "", "", lesson.slides[1].answer);
+ChangeWorkAreaText(lesson.title, lesson.slides[0].problem, "", "", lesson.slides[0].answer);
 
 var EntireCodeView = document.getElementById("EntireCodeView");
 var EntireInfoView = document.getElementById("EntireInfoView");
@@ -39,6 +39,8 @@ document.getElementById('TabButton').onclick = function()
 
 document.getElementById('NextButton').onclick = function ()
 {
-	index++;
+	if (index < lesson.slides.length - 1) {
+		index++;
+	}
 	ChangeWorkAreaText(lesson.title, lesson.slides[index].problem, "", "", lesson.slides[index].answer);
 }
