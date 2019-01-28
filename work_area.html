@@ -50,57 +50,57 @@
 				<div id="StackFramesZone"></div>
 			</div>
 
-		<!-- Our code area element -->
-		<div id="Editor">
-			<div id="CodeArea"></div>
+			<!-- Our code area element -->
+			<div id="Editor">
+				<div id="CodeArea"></div>
+			</div>
+			<div class="ExecutionButtonContainer" style="left: calc(50% - 70px);">
+				<button id="RunButton" type="button" class="ExecutionButton">
+					<img src="baseline-play_circle_outline-24px.svg" class="ExecutionButtonImage"></img>
+				</button>
+				<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
+					Run Code
+				</div></div>
+			</div>
+			<div class="ExecutionButtonContainer" style="left: calc(50% + 20px);">
+				<button id="NextButton" type="button" class="ExecutionButton">
+					<img src="baseline-arrow_forward-24px.svg" class="ExecutionButtonImage"></img>
+				</button>
+				<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
+					Next Section
+				</div></div>
+			</div>
 		</div>
-		<div class="ExecutionButtonContainer" style="left: calc(50% - 70px);">
-			<button id="RunButton" type="button" class="ExecutionButton">
-				<img src="baseline-play_circle_outline-24px.svg" class="ExecutionButtonImage"></img>
-			</button>
-			<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
-				Run Code
-			</div></div>
-		</div>
-		<div class="ExecutionButtonContainer" style="left: calc(50% + 20px);">
-			<button id="NextButton" type="button" class="ExecutionButton">
-				<img src="baseline-arrow_forward-24px.svg" class="ExecutionButtonImage"></img>
-			</button>
-			<div class="ExecutionButtonHint"><div class="ExecutionButtonHintText">
-				Next Section
-			</div></div>
-		</div>
-</div>
-<div id="EntireInfoView" class="PagePane" style="transform: translateX(-100%)">
-	<style>
-		#TabButton_Arrow
-		{
-			position: absolute;
-			top: 0;
-			left: 0;
-			transition: transform 0.5s;
-			width: 100%;
-			height: 100%;
-		}
-	</style>
-	<div id="TabButton">
-		<img src="tabbutton.png" width=100% height=100%></img>
-		<img id="TabButton_Arrow" src="baseline-keyboard_arrow_right-24px.svg"
-		style = "transform: rotate(0deg);"></img>
+		<div id="EntireInfoView" class="PagePane" style="transform: translateX(-100%)">
+			<style>
+				#TabButton_Arrow
+				{
+					position: absolute;
+					top: 0;
+					left: 0;
+					transition: transform 0.5s;
+					width: 100%;
+					height: 100%;
+				}
+			</style>
+			<div id="TabButton">
+				<img src="tabbutton.png" width=100% height=100%></img>
+				<img id="TabButton_Arrow" src="baseline-keyboard_arrow_right-24px.svg"
+				style = "transform: rotate(0deg);"></img>
 
-	</div>
-	<div id="InfoBox">
-		<!-- Put info text stuff here -->
-		<div id="InfoTitle">
-			Info Title
+			</div>
+			<div id="InfoBox">
+				<!-- Put info text stuff here -->
+				<div id="InfoTitle">
+					Info Title
+				</div>
+				<div id="InfoText">
+					Here's some brief explanation of what we just taught
+				</div>
+			</div>
 		</div>
-		<div id="InfoText">
-			Here's some brief explanation of what we just taught
-		</div>
-	</div>
-</div>
 
-		<!-- Our local script -->
+		<!-- Control code for buttons at bottom of coding page -->
 		<script>
 			//Creates the code editor out of an iframe
 			var codeArea = window.CreateCodeArea(800, 760);
@@ -111,33 +111,34 @@
 //	return x; //Oh man, I love working with APIs
 //}`);
 		</script>
+
+
+		<script src="work_area.js" type="text/javascript"></script>
+		<script src="visualization.js"></script>
+		<script>
+			// Control code for buttons at bottom of code page.
+
+			function RunAllCode ()
+			{
+				console.log("Button clicked.");
+				ClearVisualizer();
+				runCode(codeArea.GetText(), "add", [1, 2]);
+			}
+			document.getElementById("RunButton").onclick = RunAllCode;
+		</script>
+
+
+		<!-- Make debugging tools show up on F12 pressed and make page refresh on F5 pressed. -->
+		<script>
+		    document.addEventListener("keydown", function (e)
+			{
+				//if (e.which === 122) ToggleView();
+
+				if (e.which === 123) require("remote").window.OpenDevTools();
+				else if (e.which === 116) location.reload();
+		    });
+		</script>
+
+
 	</body>
-
-	<script src="work_area.js" type="text/javascript"></script>
-	<script src="visualization.js"></script>
-
-
-<!-- Test script to make stuff animate in the Visualizer area -->
-
-	<script>
-
-	</script>
-
-	<!--                          Debug tools code                             -->
-	<script>
-    document.addEventListener("keydown", function (e)
-		{
-			//if (e.which === 122) ToggleView();
-
-			if (e.which === 123) require("remote").window.OpenDevTools();
-			else if (e.which === 116) location.reload();
-    });
-	function start ()
-	{
-		console.log("Button clicked")
-		ClearVisualizer();
-		runCode(codeArea.GetText(), "add", [1, 2]);
-	}
-	document.getElementById('RunButton').onclick = start;
-	</script>
 </html>

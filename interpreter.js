@@ -102,7 +102,6 @@ function interpretExpr(expr, stackFrame) {
         return expr;
     } else if (expr.type == "Symbol") {
         anims.push(() => animateSelect(expr, stackFrame))
-        return { type: "Integer", val: stackFrame[expr.name] }
         return { type: "Integer", val: stackFrame[expr.name].val }
     } else if (expr.type == "Add") {
         var lhs = interpretExpr(expr.lhs, stackFrame);
