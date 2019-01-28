@@ -209,6 +209,8 @@ function MakeDummyFrameItem (variable_name, value_text/*string*/, x_position,y_p
 
 	ItemValueText.innerHTML = value_text;
 
+	ForceRecalculate(stackitem);
+
 	var out = stackitem;
 	return out;
 }
